@@ -1,0 +1,12 @@
+dist
+/src/themes/*
+!/src/themes/core
+!/src/themes/champgauche
+!/src/themes/siterapide
+/src/plugins/scg-ecommerce
+/src/plugins/reactwp-consent
+node_modules
+package-lock.json
+wp-config.php
+.htaccess
+.npmrc
