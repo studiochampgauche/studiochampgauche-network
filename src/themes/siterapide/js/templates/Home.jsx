@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 import { Draggable } from 'gsap/Draggable';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
 import Contents from './components/Contents';
@@ -11,6 +12,11 @@ import Button from './components/Button';
 
 const Home = () => {
 	
+	const introContentsRef = useRef(null);
+	const introEndRef = useRef(null);
+	const introSmallTextRef = useRef(null);
+	const introBigTextRef = useRef(null);
+
 	const saRef = useRef(null);
 	const saListRef = useRef(null);
 	const saTrackRef = useRef(null);
@@ -22,7 +28,72 @@ const Home = () => {
 		
 		const killEvents = [];
 
-		gsap.registerPlugin(Draggable, InertiaPlugin);
+		gsap.registerPlugin(Draggable, InertiaPlugin, SplitText);
+
+		window.loader.init.then(() => {
+
+			let split = SplitText.create(introContentsRef.current.querySelector('h1'), { type: 'lines', linesClass: 'line' });
+			let animIntro = gsap.timeline();
+
+
+			animIntro
+			.to([introContentsRef.current.querySelectorAll('h1 .line, .btn'), introEndRef.current], .4, {
+				y: 0,
+				opacity: 1,
+				stagger: .05,
+				delay: .2
+			});
+
+			let animSmallText = gsap.to(introSmallTextRef.current.querySelector('.inner-contents'), .4, {
+				y: 0,
+				opacity: 1,
+				scrollTrigger: {
+					trigger: introSmallTextRef.current,
+					start: 'top +=' + (window.innerHeight - 100),
+				}
+			});
+
+
+			let animBigText = gsap.to(introBigTextRef.current.querySelector('.inner-contents'), .4, {
+				y: 0,
+				opacity: 1,
+				scrollTrigger: {
+					trigger: introBigTextRef.current,
+					start: 'top +=' + (window.innerHeight - 100),
+				}
+			});
+
+
+			killEvents.push(() => {
+
+				if(split){
+
+					split.revert();
+					split = null;
+
+				}
+
+
+				if(animSmallText){
+
+					animSmallText.revert();
+					animSmallText = null;
+
+				}
+
+
+				if(animBigText){
+
+					animBigText.revert();
+					animBigText = null;
+
+				}
+
+			});
+
+		});
+
+
 
 		//const positions = saItemsRef.current.map(item => -(item.getBoundingClientRect().left - saListRef.current.getBoundingClientRect().left));
 		let draggableAnim = gsap.to('#mouser .arrows', .2, {
@@ -214,6 +285,7 @@ const Home = () => {
 			<section id="h__intro">
 				<div className="container">
 					<Contents
+						ref={introContentsRef}
 						titleTag='h1'
 						title='Un <span>site web</span> à votre image. <br>Simple, rapide & abordable!'
 						buttons={[
@@ -224,17 +296,19 @@ const Home = () => {
 							}
 						]}
 					/>
-					<div className="end">
+					<div ref={introEndRef} className="end">
 						<Image />
 						<div className="after-image">
 							<div className="left">
 								<Contents
+									ref={introSmallTextRef}
 									title='Personnalisé pour vos besoins'
-									text='<p>Obtenez un site web professionnel, rapide et clé en main, qui reflète votre image et attire vos clients, le tout sans contrat, payé par mois ou par année.</p>'
+									text='<p>Obtenez un site web professionnel, rapidement et clé en main pour votre entreprise, qui reflète votre image et attire vos clients. Le tout sans contrat et facturable au mois ou à l’année.</p>'
 								/>
 							</div>
 							<div className="right">
 								<Contents
+									ref={introBigTextRef}
 									text='<p>Obtenez un site web de calibre professionnel à une fraction du prix.</p>'
 								/>
 							</div>
@@ -246,7 +320,7 @@ const Home = () => {
 				<div className="container">
 					<Contents
 						title='Tarifs & forfaits'
-						text='<p>Démarrez avec le forfait qui convient à votre entreprise et ajustez-le facilement selon vos besoins.</p>'
+						text='<p>Démarrez avec le forfait qui convient le mieux à votre entreprise. Changez de forfait ou annulez à tout moment votre abonnement.</p>'
 						buttons={[
 							{
 								text: 'Débuter',
@@ -266,7 +340,7 @@ const Home = () => {
 								<Contents
 									titleTag='h3'
 									title='Multi-sections'
-									text='<p>Site web d’une page comprenant plusieurs sections.</p>'
+									text='<p>Site web d’une page comprenant plusieurs modules.</p>'
 								/>
 								<span>Voir les détails +</span>
 							</div>
@@ -291,7 +365,13 @@ const Home = () => {
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>Jusqu'à 8 sections</span>
+														<span>1 module "Hero"</span>
+													</li>
+													<li>
+														<div className="arrow">
+															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
+														</div>
+														<span>Jusqu'à 7 modules au choix</span>
 													</li>
 													<li>
 														<div className="arrow">
@@ -321,7 +401,7 @@ const Home = () => {
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>Section supplémentaire&#8239;: 3$/mois</span>
+														<span>Module supplémentaire&#8239;: 3$/mois</span>
 													</li>
 													<li>
 														<div className="arrow">
@@ -347,24 +427,6 @@ const Home = () => {
 														</div>
 														<span>Prix pour une autre extension de domaine, à discuter</span>
 													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Adresse IP dédié&#8239;: 120$/an</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Hebergement courriel 100 GO&#8239;: 50$/an</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Hebergement courriel +10 GO&#8239;: 5$/an</span>
-													</li>
 												</ul>
 											</div>
 										</div>
@@ -388,7 +450,7 @@ const Home = () => {
 								<Contents
 									titleTag='h3'
 									title='Multi-pages'
-									text='<p>Site web de plusieurs pages et nombre de sections illimités.</p>'
+									text='<p>Site web de plusieurs pages, personnalisé et modulable.</p>'
 								/>
 								<span>Voir les détails +</span>
 							</div>
@@ -419,7 +481,7 @@ const Home = () => {
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>Nombre de section illimité</span>
+														<span>Jusqu'à 30 modules</span>
 													</li>
 													<li>
 														<div className="arrow">
@@ -449,7 +511,13 @@ const Home = () => {
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>Page supplémentaire&#8239;: 8$/mois</span>
+														<span>Page supplémentaire&#8239;: 8$/mois<br /><small>(Ajout de 6 modules à votre forfait)</small></span>
+													</li>
+													<li>
+														<div className="arrow">
+															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
+														</div>
+														<span>Module supplémentaire&#8239;: 3$/mois</span>
 													</li>
 													<li>
 														<div className="arrow">
@@ -474,24 +542,6 @@ const Home = () => {
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
 														<span>Prix pour une autre extension de domaine, à discuter</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Adresse IP dédié&#8239;: 120$/an</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Hebergement courriel 100 GO&#8239;: 50$/an</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Hebergement courriel +10 GO&#8239;: 5$/an</span>
 													</li>
 												</ul>
 											</div>
@@ -531,7 +581,7 @@ const Home = () => {
 								<Contents
 									titleTag='h3'
 									title='Petit budget'
-									text='<p>Site web d’une page de 4 sections dont 2 au choix.</p>'
+									text='<p>Site web d’une page de 4 modules dont 2 au choix.</p>'
 								/>
 								<span>Voir les détails +</span>
 							</div>
@@ -556,25 +606,33 @@ const Home = () => {
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>1 section "Hero"</span>
+														<span>1 module "Hero"</span>
 													</li>
 													<li>
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>1 section contact</span>
+														<span>1 module contact</span>
 													</li>
 													<li>
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
-														<span>2 sections au choix</span>
+														<span>2 modules au choix</span>
 													</li>
 													<li>
 														<div className="arrow">
 															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
 														</div>
 														<span>1 langue</span>
+													</li>
+													<li>
+														<Link to="#h__benefits">
+															<div className="arrow">
+																<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
+															</div>
+															<span>Les avantages siterapide.ca<br /><small>(Excluant le nom de domaine gratuit.)</small></span>
+														</Link>
 													</li>
 												</ul>
 											</div>
@@ -604,24 +662,6 @@ const Home = () => {
 														</div>
 														<span>Prix pour une autre extension de domaine, à discuter</span>
 													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Adresse IP dédié&#8239;: 120$/an</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Hebergement courriel 100 GO&#8239;: 50$/an</span>
-													</li>
-													<li>
-														<div className="arrow">
-															<svg xmlns="http://www.w3.org/2000/svg"width="32" height="31.918" viewBox="0 0 32 31.918"><g><path d="M14.834.03C28.5-.764,37.013,14.565,28.742,25.577A16.018,16.018,0,0,1,.928,21.364C-2.608,11.513,4.373.637,14.834.03m.223,1.058A14.9,14.9,0,1,0,28.04,24.708c7.425-10.22-.456-24.3-12.983-23.62" transform="translate(0 0)" fill="#214cf3"/><path d="M163.276,200.222h0a.514.514,0,0,1-.012.712l-8.762,8.814c-.376.316-.529.485-.978.139l-4.931-4.93a.538.538,0,0,1,.64-.862l4.7,4.645,8.6-8.533a.514.514,0,0,1,.738.015" transform="translate(-140.129 -188.9)" fill="#214cf3"/></g></svg>
-														</div>
-														<span>Hebergement courriel +10 GO&#8239;: 5$/an</span>
-													</li>
 												</ul>
 											</div>
 										</div>
@@ -642,7 +682,7 @@ const Home = () => {
 				<div className="container">
 					<Contents
 						title='Avantages <br>& inclusions'
-						text='<p>Tous nos clients bénéficient d’une panoplie d’avantages et d’inclusions afin de favoriser le fonctionnement de leur marketing web.</p>'
+						text='<p>Bénéficiez de plusieurs avantages et inclusions pensés pour favoriser votre marketing web et soutenir la croissance de votre entreprise</p>'
 						buttons={[
 							{
 								text: 'Débuter',
