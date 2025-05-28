@@ -205,12 +205,33 @@ const Home = () => {
 			const itemsToSwitch = tbody?.querySelectorAll('.inner .bottom .items .item');
 
 
-			let tl = tbody ? gsap.to(tbody, .2, {
-				height: tbody.querySelector('.inner').clientHeight,
-				onComplete: () => ScrollTrigger.refresh(),
-				onReverseComplete: () => ScrollTrigger.refresh(),
-			})
-			.paused(true) : null;
+			let tl = null;
+
+			if(tbody){
+
+				tl = gsap.timeline({
+					onComplete: () => ScrollTrigger.refresh(),
+					onReverseComplete: () => ScrollTrigger.refresh(),
+				});
+
+				tl
+				.to(tbody, .2, {
+					height: tbody.querySelector('.inner').clientHeight,
+				})
+				.to(thead.parentNode.querySelector('.thead > span'), .1, {
+					opacity: 0,
+					onComplete: () => {
+						thead.parentNode.querySelector('.thead > span').innerText = 'Fermer les détails -';
+					}
+				}, 0)
+				.to(thead.parentNode.querySelector('.thead > span'), .1, {
+					opacity: 1,
+					onReverseComplete: () => {
+						thead.parentNode.querySelector('.thead > span').innerText = 'Voir les détails +';
+					}
+				}, .1)
+				.paused(true);
+			}
 
 
 			const handleClick = () => {
