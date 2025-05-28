@@ -8,7 +8,7 @@ add_action('wp_enqueue_scripts', function(){
 	/*
 	* CSS
 	*/
-	//wp_enqueue_style('core', get_template_directory_uri() . '/assets/css/siterapide.min.css', null, null, null);
+	//wp_enqueue_style('core', get_template_directory_uri() . '/assets/css/core.min.css', null, null, null);
 
 
 	/*
