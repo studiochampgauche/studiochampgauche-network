@@ -165,6 +165,8 @@
 			& > .contents{
 				max-width: 445px;
 				.inner-contents{
+					opacity: 0;
+					transform: translate(0, 100px);
 					h2{
 						margin: 0 0 13px;
 						color: var(--gray-n4-color);
@@ -189,7 +191,9 @@
 					padding: 10px clamp(30px, vw(42px), 42px) 10px 10px;
 					transition-property: background;
 					transition-duration: .2s;
+					transform: translate(0, 100px);
 					overflow: hidden;
+					opacity: 0;
 					.thead{
 						display: flex;
 						align-items: center;
@@ -406,14 +410,18 @@
 						margin-top: 20px;
 					}
 					&:nth-last-child(2){
-						transition-property: opacity;
+						transition-property: background;
 						transition-duration: .2s;
 						.thead{
 							cursor: initial;
+							transition-property: opacity;
+							transition-duration: .2s;
 						}
 						&:hover{
-							opacity: .3;
-
+							background: rgba(239, 239, 239, .3);
+							.thead{
+								opacity: .3;
+							}
 						}
 					}
 					&:not(:nth-last-child(2)){
@@ -589,6 +597,8 @@
 			& > .contents{
 				max-width: 445px;
 				.inner-contents{
+					opacity: 0;
+					transform: translate(0, 100px);
 					h2{
 						margin: 0 0 13px;
 						color: var(--white-color);
@@ -617,7 +627,11 @@
 					column-gap: clamp(15px, vw(30px), 30px);
 					border-radius: 30px;
 					border: 1px solid var(--gray-n6-color);
+					transform: translate(-100px, 0);
+					transition-property: background;
+					transition-duration: .2s;
 					align-items: center;
+					opacity: 0;
 					.icon{
 						background: rgba(75, 75, 75, .4);
 						display: flex;
@@ -657,6 +671,9 @@
 							color: var(--white-color);
 						}
 					}
+					&:hover{
+						background: rgba(75, 75, 75, .4);
+					}
 				}
 			}
 		}
@@ -686,6 +703,8 @@
 			& > .contents{
 				max-width: 920px;
 				.inner-contents{
+					opacity: 0;
+					transform: translate(0, 100px);
 					h2{
 						color: var(--white-color);
 						span{
@@ -705,6 +724,8 @@
 						position: relative;
 						display: inline-block;
 						width: 380px;
+						transform: translate(0, 100px);
+						opacity: 0;
 						.img-container{
 							width: 100%;
 							height: 391px;
@@ -753,6 +774,7 @@
 			.btn{
 				max-width: clamp(210px, vw(229px), 229px);
 				margin-top: 30px;
+				opacity: 0;
 			}
 		}
 		@media screen and (max-width: 540px){
@@ -780,6 +802,8 @@
 				text-align: center;
 				margin: 0 auto;
 				.inner-contents{
+					opacity: 0;
+					transform: translate(0, 100px);
 					h2{
 						font-size: clamp(32px, vw(100px), 100px);
 						line-height: 100%;

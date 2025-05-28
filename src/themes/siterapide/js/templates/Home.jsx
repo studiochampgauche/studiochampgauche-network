@@ -17,12 +17,21 @@ const Home = () => {
 	const introSmallTextRef = useRef(null);
 	const introBigTextRef = useRef(null);
 
+	const priceContentsRef = useRef(null);
+	const priceListRef = useRef(null);
+	const priceItemsRef = useRef([]);
+
+	const benefitsContentsRef = useRef(null);
+	const benefitsListRef = useRef(null);
+	const benefitsItemsRef = useRef([]);
+
 	const saRef = useRef(null);
+	const saContentsRef = useRef(null);
 	const saListRef = useRef(null);
 	const saTrackRef = useRef(null);
 	const saItemsRef = useRef([]);
-	const priceItemsRef = useRef([]);
-	const benefitsItemsRef = useRef([]);
+
+	const ctaContentsRef = useRef(null);
 
 	useEffect(() => {
 		
@@ -44,25 +53,6 @@ const Home = () => {
 				delay: .2
 			});
 
-			let animSmallText = gsap.to(introSmallTextRef.current.querySelector('.inner-contents'), .4, {
-				y: 0,
-				opacity: 1,
-				scrollTrigger: {
-					trigger: introSmallTextRef.current,
-					start: 'top +=' + (window.innerHeight - 100),
-				}
-			});
-
-
-			let animBigText = gsap.to(introBigTextRef.current.querySelector('.inner-contents'), .4, {
-				y: 0,
-				opacity: 1,
-				scrollTrigger: {
-					trigger: introBigTextRef.current,
-					start: 'top +=' + (window.innerHeight - 100),
-				}
-			});
-
 
 			killEvents.push(() => {
 
@@ -73,24 +63,105 @@ const Home = () => {
 
 				}
 
-
-				if(animSmallText){
-
-					animSmallText.revert();
-					animSmallText = null;
-
-				}
-
-
-				if(animBigText){
-
-					animBigText.revert();
-					animBigText = null;
-
-				}
-
 			});
 
+		});
+
+
+
+		let animSmallText = gsap.to(introSmallTextRef.current.querySelector('.inner-contents'), .4, {
+			y: 0,
+			opacity: 1,
+			scrollTrigger: {
+				trigger: introSmallTextRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+		let animBigText = gsap.to(introBigTextRef.current.querySelector('.inner-contents'), .4, {
+			y: 0,
+			opacity: 1,
+			scrollTrigger: {
+				trigger: introBigTextRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+		let animPriceContents = gsap.to(priceContentsRef.current.querySelector('.inner-contents'), .4, {
+			y: 0,
+			opacity: 1,
+			scrollTrigger: {
+				trigger: priceContentsRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+		let animPriceItems = gsap.to(priceItemsRef.current, .4, {
+			y: 0,
+			opacity: 1,
+			stagger: .05,
+			scrollTrigger: {
+				trigger: priceListRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+
+		let animBenefitsContents = gsap.to(benefitsContentsRef.current.querySelector('.inner-contents'), .4, {
+			y: 0,
+			opacity: 1,
+			scrollTrigger: {
+				trigger: benefitsContentsRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+		let animBenefitsItems = gsap.to(benefitsItemsRef.current, .4, {
+			x: 0,
+			opacity: 1,
+			stagger: .05,
+			scrollTrigger: {
+				trigger: benefitsListRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+
+		let animSaContents = gsap.to(saContentsRef.current.querySelector('.inner-contents'), .4, {
+			y: 0,
+			opacity: 1,
+			scrollTrigger: {
+				trigger: saContentsRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+		let animSaItems = gsap.to([saItemsRef.current, saRef.current.querySelector('.btn')], .4, {
+			y: 0,
+			opacity: 1,
+			stagger: .05,
+			scrollTrigger: {
+				trigger: saListRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
+		});
+
+
+
+		let animCtaContents = gsap.to(ctaContentsRef.current.querySelector('.inner-contents'), .4, {
+			y: 0,
+			opacity: 1,
+			scrollTrigger: {
+				trigger: ctaContentsRef.current,
+				start: 'top +=' + (window.innerHeight - 100),
+			}
 		});
 
 
@@ -131,15 +202,15 @@ const Home = () => {
 			const thead = item.querySelector('.thead');
 			const tbody = item.querySelector('.tbody');
 
-			const itemsToSwitch = tbody.querySelectorAll('.inner .bottom .items .item');
+			const itemsToSwitch = tbody?.querySelectorAll('.inner .bottom .items .item');
 
 
-			let tl = gsap.to(tbody, .2, {
+			let tl = tbody ? gsap.to(tbody, .2, {
 				height: tbody.querySelector('.inner').clientHeight,
 				onComplete: () => ScrollTrigger.refresh(),
 				onReverseComplete: () => ScrollTrigger.refresh(),
 			})
-			.paused(true);
+			.paused(true) : null;
 
 
 			const handleClick = () => {
@@ -148,15 +219,15 @@ const Home = () => {
 
 				if(item.classList.contains('active')){
 
-					tl.play();
-					tl.reversed(false);
+					tl?.play();
+					tl?.reversed(false);
 
 				} else {
 
-					tbody.querySelector('.inner .top ul li:nth-child(1)').dispatchEvent(new Event('click'));
+					tbody?.querySelector('.inner .top ul li:nth-child(1)')?.dispatchEvent(new Event('click'));
 
-					tl.play();
-					tl.reversed(true);
+					tl?.play();
+					tl?.reversed(true);
 
 				}
 
@@ -164,7 +235,7 @@ const Home = () => {
 			thead.addEventListener('click', handleClick);
 
 
-			tbody.querySelectorAll('.inner .top ul li')?.forEach((li, i) => {
+			tbody?.querySelectorAll('.inner .top ul li')?.forEach((li, i) => {
 
 				const handleLiClick = () => {
 
@@ -274,6 +345,79 @@ const Home = () => {
 
 			}
 
+
+			if(animSmallText){
+
+				animSmallText.kill();
+				animSmallText = null;
+
+			}
+
+
+			if(animBigText){
+
+				animBigText.kill();
+				animBigText = null;
+
+			}
+
+
+			if(animPriceContents){
+
+				animPriceContents.kill();
+				animPriceContents = null;
+
+			}
+
+
+			if(animPriceItems){
+
+				animPriceItems.kill();
+				animPriceItems = null;
+
+			}
+
+
+
+			if(animBenefitsContents){
+
+				animBenefitsContents.kill();
+				animBenefitsContents = null;
+
+			}
+
+
+			if(animBenefitsItems){
+
+				animBenefitsItems.kill();
+				animBenefitsItems = null;
+
+			}
+
+
+			if(animSaContents){
+
+				animSaContents.kill();
+				animSaContents = null;
+
+			}
+
+
+			if(animSaItems){
+
+				animSaItems.kill();
+				animSaItems = null;
+
+			}
+
+
+			if(animCtaContents){
+
+				animCtaContents.kill();
+				animCtaContents = null;
+
+			}
+
 		});
 
 
@@ -319,6 +463,7 @@ const Home = () => {
 			<section id="h__prices">
 				<div className="container">
 					<Contents
+						ref={priceContentsRef}
 						title='Tarifs & forfaits'
 						text='<p>Démarrez avec le forfait qui convient le mieux à votre entreprise. Changez de forfait ou annulez à tout moment votre abonnement.</p>'
 						buttons={[
@@ -329,7 +474,7 @@ const Home = () => {
 							}
 						]}
 					/>
-					<div className="list">
+					<div ref={priceListRef} className="list">
 						<div ref={(el) => (priceItemsRef.current[0] = el)} className="item">
 							<div className="thead">
 								<div className="price">
@@ -556,7 +701,7 @@ const Home = () => {
 								</div>
 							</div>
 						</div>
-						<div className="item">
+						<div ref={(el) => (priceItemsRef.current[2] = el)} className="item">
 							<div className="thead">
 								<div className="price">
 									<span><span>399$</span>/mois*</span>
@@ -571,7 +716,7 @@ const Home = () => {
 								<span>Bientôt disponible</span>
 							</div>
 						</div>
-						<div ref={(el) => (priceItemsRef.current[2] = el)} className="item">
+						<div ref={(el) => (priceItemsRef.current[3] = el)} className="item">
 							<div className="thead">
 								<div className="price">
 									<span><span>199$</span>/an*</span>
@@ -681,6 +826,7 @@ const Home = () => {
 			<section id="h__benefits">
 				<div className="container">
 					<Contents
+						ref={benefitsContentsRef}
 						title='Avantages <br>& inclusions'
 						text='<p>Bénéficiez de plusieurs avantages et inclusions pensés pour favoriser votre marketing web et soutenir la croissance de votre entreprise</p>'
 						buttons={[
@@ -691,7 +837,7 @@ const Home = () => {
 							}
 						]}
 					/>
-					<div className="list">
+					<div ref={benefitsListRef} className="list">
 						<Link ref={(el) => (benefitsItemsRef.current[0] = el)} to="/contact/" className="item">
 							<div className="icon">
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 160 160"><g><path d="M94.1,102.5v-8c0-.7-.6-1.3-1.3-1.3s-1.3.6-1.3,1.3v8h-2.8v-38.8h2.8v22.7c0,.7.6,1.3,1.3,1.3s1.3-.6,1.3-1.3v-19.9c0-1.3,0-2.6,0-3.9,0-1-.6-1.5-1.2-2.3-1.5-1.9-2.9-3.8-4.4-5.7l-6.7-8.6c-.7-.9-2.1-1.1-3-.4-.1.1-.3.2-.4.4l-4.3,5.5-4.8,6.2-1.9,2.4c-.5.6-1.4,1.5-1.4,2.2v7.8c0,.7.5,1.3,1.3,1.4.7,0,1.3-.5,1.4-1.3,0,0,0,0,0,0v-6.4h2.8v38.8h-2.8v-24.2c0-.7-.5-1.3-1.3-1.4-.7,0-1.3.5-1.4,1.3,0,0,0,0,0,0v24.3c-1.4.3-2.4,1.5-2.4,3v6.3c0,1.7,1.4,3,3,3h1.4v2.6c0,4.3,3.5,7.8,7.8,7.8h8.3c4.3,0,7.8-3.5,7.8-7.8v-2.6h1.4c1.7,0,3-1.4,3-3v-6.3c0-1.4-1-2.6-2.4-3M83.7,52.7h-7.3l3.6-4.7,3.6,4.7ZM70.1,60.9l4.3-5.5h11.4l4.3,5.5h-20ZM86,102.4h-2.1v-38.8h2.1v38.8ZM81.3,102.4h-2.4v-38.8h2.4v38.8ZM76.2,102.4h-2.1v-38.8h2.1v38.8ZM89.4,117.4c0,2.8-2.3,5.2-5.2,5.2h-8.3c-2.8,0-5.2-2.3-5.2-5.2v-2.6h18.6v2.6ZM93.8,111.7c0,.2-.2.4-.4.4h-26.7c-.2,0-.4-.2-.4-.4v-6.3c0-.2.2-.4.4-.4h26.7c.2,0,.4.2.4.4v6.3Z" fill="#1d1d1b"/><path d="M122.7,45.5c1.3,0,2.4-1.1,2.4-2.4v-5.8c0-1.3-1.1-2.4-2.4-2.4h-5.8c-1.3,0-2.4,1.1-2.4,2.4v1.6h-29.5c-3.2-.2-6.5-.2-9.7,0-.2,0-.5,0-.7,0h-29.1v-1.6c0-1.3-1.1-2.4-2.4-2.4h-5.8c-1.3,0-2.4,1.1-2.4,2.4v5.8c0,1.3,1.1,2.4,2.4,2.4h1.6v25.1c0,.2,0,.4,0,.6,0,0,0,0,0,.1v10.4h-1.6c-1.3,0-2.4,1.1-2.4,2.4v5.8c0,1.3,1.1,2.4,2.4,2.4h5.8c1.3,0,2.4-1.1,2.4-2.4v-5.8c0-1.3-1.1-2.4-2.4-2.4h-1.6v-11c0-5.2,1.7-10.3,4.7-14.6,5.6-7.5,13.8-12.5,23-14.1,1.8-.3,3.6-.6,5.4-.7h10.3c4.6.3,9.1,1.2,13.4,2.9,6.2,2.4,11.5,6.5,15.4,11.9,3.1,4.4,4.8,9.6,4.7,15,0,0,0,0,0,.1v10.4h-1.6c-1.3,0-2.4,1.1-2.4,2.4v5.8c0,1.3,1.1,2.4,2.4,2.4h5.8c1.3,0,2.4-1.1,2.4-2.4v-5.8c0-1.3-1.1-2.4-2.4-2.4h-1.6v-36.3h1.6ZM43,89.7h-5.3v-5.3h5.3v5.3ZM37.7,37.5h5.3v5.3h-5.3v-5.3ZM44.2,54.7c-1,1.4-1.9,2.9-2.6,4.4v-13.7h1.6c1.3,0,2.4-1.1,2.4-2.4v-1.6h16.3c-7.1,2.5-13.3,7.1-17.7,13.2M115.9,54.7c-4.2-5.8-9.9-10.2-16.6-12.8-.4-.1-.7-.3-1.1-.4h16.3v1.6c0,1.3,1.1,2.4,2.4,2.4h1.6v13.7c-.7-1.6-1.6-3-2.6-4.4M122.5,89.7h-5.3v-5.3h5.3v5.3ZM117.2,37.5h5.3v5.3h-5.3v-5.3Z" fill="#1d1d1b"/></g></svg>
@@ -806,6 +952,7 @@ const Home = () => {
 			<section ref={saRef} id="h__sectors-activity">
 				<div className="container">
 					<Contents
+						ref={saContentsRef}
 						title="La meilleure solution peu importe votre <span>secteur d'activité</span>"
 					/>
 					<div ref={saListRef} className="list">
@@ -846,6 +993,7 @@ const Home = () => {
 			<section id="h__cta">
 				<div className="container">
 					<Contents
+						ref={ctaContentsRef}
 						title={'Besoin <span>d\'informations</span> ?'}
 						text='<p>Contactez-nous dès maintenant pour découvrir nos forfaits, poser vos questions ou échanger avec un de nos représentants pour débuter une analyse de vos besoins.</p>'
 						buttons={[
