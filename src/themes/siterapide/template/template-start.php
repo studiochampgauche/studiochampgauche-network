@@ -8,44 +8,6 @@ get_header();
 while(have_posts()) : the_post();
 ?>
 
-<section id="start__intro" className="intro">
-	<div className="container">
-		<?= displayContent(null, 'Prêt à <span>débuter</span> votre site ?', null, '<p>Vous avez un projet en tête ? Il est temps de passer à l’action ! En seulement 3 étapes simples, nous vous accompagnons dans la conception d’un site web professionnel, adapté à vos besoins.</p>', [], 'h1'); ?>
-	</div>
-</section>
-<section id="start__steps">
-	<div className="container">
-		<div className="list">
-			<div className="item">
-				<div className="number">
-					<span>1</span>
-				</div>
-				<?= displayContent(null, 'Prise de contact', null, '<p>Faites votre demande de contact via le formulaire ci-dessous.</p>'); ?>
-			</div>
-			<div className="item">
-				<div className="number">
-					<span>2</span>
-				</div>
-				<?= displayContent(null, 'Analyse des besoins', null, '<p>Un représentant vous contactera dans les 48h ouvrables.</p>'); ?>
-			</div>
-			<div className="item">
-				<div className="number">
-					<span>3</span>
-				</div>
-				<?= displayContent(null, 'Prêt en 30 jours*', null, '<p>*Déploiement rapide du site web avec la collaboration du client.</p>'); ?>
-			</div>
-		</div>
-	</div>
-</section>
-<section id="start__form">
-	<div className="container">
-		<?= displayContent(null, 'Contactez-nous', null, '<p>Remplissez le formulaire et un représentant vous contactera dans les 48 heures ouvrables suivantes. Pour tout autres questions <a href="mailto:info@siterapide.ca">info@siterapide.ca</a></p>', [
-			[
-				'text' => 'Des questions ?',
-				'href' => '/contact/'
-			]
-		]); ?>
-	</div>
-</section>
+<section id="start__intro" class="intro"><div class="container"><div class="contents"><div class="inner-contents"><h1>Prêt à <span>débuter</span> votre site ?</h1><rwp-wrap><p>Obtenez un site web professionnel, rapide et clé en main en moins de 30 jours, avec un design moderne et responsive, le tout sans contrat. Choisissez entre la tarification annuelle ou mensuelle, annuler à tout moment.</p><p style="font-weight: 700;">Analyse des besoins sans frais.</p></rwp-wrap></div></div></div></section><section id="start__steps"><div class="container"><div class="list"><div class="item"><div class="number"><span>1</span></div><div class="contents"><div class="inner-contents"><h2>Prise de contact</h2><rwp-wrap><p>Prenez contact avec nous via le formulaire ci-dessous.</p></rwp-wrap></div></div></div><div class="item"><div class="number"><span>2</span></div><div class="contents"><div class="inner-contents"><h2>Analyse des besoins</h2><rwp-wrap><p>Un représentant vous contactera dans les 48h ouvrables.</p></rwp-wrap></div></div></div><div class="item"><div class="number"><span>3</span></div><div class="contents"><div class="inner-contents"><h2>Prêt avant 30 jours</h2><rwp-wrap><p>Votre site web prêt dans les 30 jours suivant votre paiement initial.</p></rwp-wrap></div></div></div></div></div></section><section id="start__form"><div class="container"><div class="contents"><div class="inner-contents"><h2>Contactez-nous</h2><rwp-wrap><p>Remplissez le formulaire suivant pour recevoir l’appel d’un de nos représentants.</p></rwp-wrap><div class="buttons"><a class="btn gray has-arrow" href="/contact/" data-discover="true"><span>Des questions ?</span><div class="btn-after"><div class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="35.275" height="23.504" viewBox="0 0 35.275 23.504"><path d="M23.274,0l-.837.82L33.008,11.173H0v1.159H33.008L22.437,22.684l.837.82L34.438,12.572l.837-.82-.837-.82Z" transform="translate(0 0)" fill="#214cf3"></path></svg></div></div></a></div></div></div><form method="POST" action="rwpforms"><div class="fields"><div class="field split text"><div class="the-field"><input id="firstname" placeholder="Prénom*" autocomplete="given-name" minlength="3" maxlength="30" required="" type="text" name="firstname"></div></div><div class="field split text"><div class="the-field"><input id="lastname" placeholder="Nom de famille*" autocomplete="family-name" minlength="3" maxlength="30" required="" type="text" name="lastname"></div></div><div class="field split email"><div class="the-field"><input id="email" placeholder="Courriel*" autocomplete="email" required="" type="email" name="email"></div></div><div class="field split tel"><div class="the-field"><input id="phone" placeholder="Téléphone*" autocomplete="tel" minlength="14" maxlength="14" required="" type="tel" name="phone"></div></div><div class="field text"><div class="the-field"><input id="company" placeholder="Nom de l'entreprise" minlength="1" maxlength="50" type="text" name="company"></div></div><div class="field select"><div class="the-field"><select id="plan" name="plan" required=""><option value="" disabled="" selected="">De quel forfait voulez-vous discuter ?*</option><option value="multi-sections">Forfait Multi-sections</option><option value="multi-pages">Forfait Multi-pages</option><option value="small-budget">Forfait Petit budget</option></select><div class="select-icon"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 62.1 33.9" enable-background="new 0 0 62.1 33.9"><path d="M57.3,0.8L31,27L4.8,0.8c-1.1-1.1-2.9-1.1-4,0l0,0c-1.1,1.1-1.1,2.9,0,4L29,33c1.1,1.1,2.9,1.1,4,0L61.3,4.8 c1.1-1.1,1.1-2.9,0-4l0,0C60.2-0.3,58.4-0.3,57.3,0.8z"></path></svg></div></div></div></div><div class="buttons"><button class="btn blue has-arrow" type="submit"><span>Envoyer</span><div class="btn-after"><div class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="35.275" height="23.504" viewBox="0 0 35.275 23.504"><path d="M23.274,0l-.837.82L33.008,11.173H0v1.159H33.008L22.437,22.684l.837.82L34.438,12.572l.837-.82-.837-.82Z" transform="translate(0 0)" fill="#214cf3"></path></svg></div></div></button></div></form></div></section>
 
 <?php endwhile; get_footer(); ?>
