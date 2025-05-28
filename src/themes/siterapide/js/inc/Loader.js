@@ -63,12 +63,12 @@ const Loader = {
 			})
 			.to(this.el.querySelector('.bg'), 1.2, {
 				scaleY: 0,
-				ease: 'expo.inOut',
-				onComplete: () => done()
+				ease: 'expo.inOut'
 			})
 			.set(this.el, {
 				pointerEvents: 'none'
-			}, '-=1.2');
+			}, '-=1.2')
+			.add(() => done(), '-=.6');
 
 		});
 
