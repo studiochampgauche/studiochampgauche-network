@@ -103,7 +103,7 @@ const Mouse = {
 
 
 
-                document.querySelectorAll('.logo, .btn, #h__prices .list .item')?.forEach(item => {
+                document.querySelectorAll('.logo, .btn:not(.white), #h__prices .list .item, footer .container .top .quick-links ul:nth-child(2)')?.forEach(item => {
 
                     const handleMouseEnter = () => {
 
