@@ -68,7 +68,7 @@ const Loader = {
 			.set(this.el, {
 				pointerEvents: 'none'
 			}, '-=1.2')
-			.add(() => done(), '-=.6');
+			.add(() => done(), '-=.8');
 
 		});
 
