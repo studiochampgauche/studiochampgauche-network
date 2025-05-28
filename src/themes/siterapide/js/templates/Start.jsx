@@ -12,8 +12,8 @@ const Start = () => {
 				<div className="container">
 					<Contents
 						titleTag='h1'
-						title='Obtenir mon <span>site web</span>'
-						text={'<p>Obtenez un site web professionnel, rapide et clé en main en moins de 30 jours, avec un design moderne et responsive, le tout sans contrat, et payez à votre rythme, soit par mois ou par année, selon vos besoins.</p>'}
+						title='Prêt à <span>débuter</span> votre site ?'
+						text={'<p>Obtenez un site web professionnel, rapide et clé en main en moins de 30 jours, avec un design moderne et responsive, le tout sans contrat. Choisissez entre la tarification annuelle ou mensuelle, annuler à tout moment.</p><p style="font-weight: 700;">Analyse des besoins sans frais.</p>'}
 					/>
 				</div>
 			</section>
@@ -44,7 +44,7 @@ const Start = () => {
 							</div>
 							<Contents
 								title='Prêt avant 30 jours'
-								text='<p>Votre site prêt avant 30 jours suivant votre paiement initial.</p>'
+								text='<p>Votre site web prêt dans les 30 jours suivant votre paiement initial.</p>'
 							/>
 						</div>
 					</div>
@@ -54,7 +54,7 @@ const Start = () => {
 				<div className="container">
 					<Contents
 						title='Contactez-nous'
-						text='<p>Remplissez le formulaire ci-droit pour recevoir l’appel d’un de nos représentants.</p>'
+						text='<p>Remplissez le formulaire suivant pour recevoir l’appel d’un de nos représentants.</p>'
 						buttons={[
 							{
 								text: 'Des questions ?',

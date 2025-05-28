@@ -21,7 +21,7 @@ const Contact = () => {
 				<div className="container">
 					<Contents
 						title='Contactez-nous'
-						text='<p>Remplissez le formulaire et un représentant vous contactera dans les 48 heures ouvrables suivantes.</p><ul><li><span>Questions&#8239;:</span><a href="mailto:info@siterapide.ca">info@siterapide.ca</a></li><li><span>Support&#8239;:</span><a href="mailto:support@siterapide.ca">support@siterapide.ca</a></li><li><span>Carrière&#8239;:</span><a href="mailto:cv@siterapide.ca">cv@siterapide.ca</a></li></ul>'
+						text='<p>Remplissez notre formulaire et nous serons ravis de répondre à vos questions et de discuter de vos besoins.</p><ul><li><span>Questions&#8239;:</span><a href="mailto:info@siterapide.ca">info@siterapide.ca</a></li><li><span>Support&#8239;:</span><a href="mailto:support@siterapide.ca">support@siterapide.ca</a></li><li><span>Carrière&#8239;:</span><a href="mailto:cv@siterapide.ca">cv@siterapide.ca</a></li></ul>'
 					/>
 					<Form
 						data={{
