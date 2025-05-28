@@ -14,6 +14,10 @@
 						font-size: clamp(32px, vw(100px), 100px);
 						line-height: 100%;
 						color: var(--gray-n4-color);
+						.line{
+							transform: translate(0, 100px);
+							opacity: 0;
+						}
 						span{
 							color: var(--theme-color);
 						}
@@ -21,6 +25,8 @@
 					.btn{
 						max-width: clamp(260px, vw(290px), 290px);
 						margin: 30px auto 0;
+						transform: translate(0, 100px);
+						opacity: 0;
 					}
 				}
 			}
@@ -31,6 +37,8 @@
 				border-radius: 30px;
 				margin: 290px 0 0;
 				padding: 0 clamp(20px, vw(40px), 40px) 101px;
+				transform: translate(0, 100px);
+				opacity: 0;
 				.img-container{
 					width: 100%;
 					max-width: 1337px;
@@ -56,6 +64,8 @@
 						max-width: 600px;
 						.contents{
 							.inner-contents{
+								opacity: 0;
+								transform: translate(0, 100px);
 								h2{
 									font-size: clamp(24px, vw(30px), 30px);
 									line-height: 100%;
@@ -65,6 +75,9 @@
 								rwp-wrap{
 									p{
 										color: var(--white-color);
+										& + p{
+											//margin: 25px 0 0;
+										}
 									}
 								}
 							}
@@ -75,6 +88,8 @@
 						max-width: 755px;
 						.contents{
 							.inner-contents{
+								opacity: 0;
+								transform: translate(0, 100px);
 								rwp-wrap{
 									p{
 										font-size: clamp(32px, vw(60px), 60px);
@@ -336,6 +351,9 @@
 													font-size: clamp(16px, vw(20px), 20px);
 													font-weight: 500;
 													color: var(--gray-n9-color);
+													small{
+														font-size: 14px;
+													}
 												}
 												a{
 													display: flex;

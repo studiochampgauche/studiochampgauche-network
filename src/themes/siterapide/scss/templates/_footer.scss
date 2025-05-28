@@ -65,6 +65,7 @@ footer{
 					}
 					&:nth-child(2){
 						display: flex;
+						width: fit-content;
 						column-gap: 10px;
 						margin: 10px 0 0;
 						align-items: center;
@@ -121,14 +122,23 @@ footer{
 										top: 50%;
 										left: 50%;
 										transform: translate(-50%, -50%);
+										path{
+											transition-property: fill;
+											transition-duration: .2s;
+										}
 										&:nth-child(1){
 											transform: translate(-50%, calc(-50% - 20px));
 											opacity: 0;
 										}
 									}
 									&:hover{
-										background: var(--gray-n4-color);
-										border-color: var(--gray-n4-color);
+										background: var(--white-color);
+										//border-color: var(--gray-n4-color);
+										svg{
+											path{
+												fill: var(--theme-color);
+											}
+										}
 									}
 								}
 							}
