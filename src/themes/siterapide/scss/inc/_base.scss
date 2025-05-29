@@ -174,6 +174,10 @@ section{
 					font-size: clamp(32px, vw(100px), 100px);
 					line-height: 100%;
 					color: var(--gray-n4-color);
+					.line{
+						transform: translate(0, 100px);
+						opacity: 0;
+					}
 					span{
 						color: var(--theme-color);
 					}
@@ -184,6 +188,8 @@ section{
 					max-width: clamp(740px, vw(945px), 945px);
 					p{
 						color: var(--gray-n6-color);
+						transform: translate(0, 100px);
+						opacity: 0;
 						& + p{
 							margin: 25px 0 0;
 						}
