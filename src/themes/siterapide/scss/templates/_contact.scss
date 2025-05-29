@@ -16,6 +16,8 @@
 			& > .contents{
 				max-width: 445px;
 				.inner-contents{
+					transform: translate(0, 100px);
+					opacity: 0;
 					h2{
 						margin: 0 0 13px;
 						color: var(--gray-n4-color);
@@ -62,6 +64,8 @@
 				max-width: 1065px;
 				border-radius: 30px;
 				padding: clamp(60px, vw(90px), 90px) clamp(30px, vw(77px), 77px);
+				transform: translate(0, 100px);
+				opacity: 0;
 				.fields{
 					display: flex;
 					row-gap: 10px;
