@@ -15,8 +15,10 @@
 					padding: 10px clamp(25px, vw(36px), 36px) 10px 10px;
 					column-gap: clamp(25px, vw(36px), 36px);
 					min-height: clamp(200px, vw(240px), 240px);
+					transform: translate(0, 100px);
 					border-radius: 30px;
 					align-items: center;
+					opacity: 0;
 					.number{
 						background: var(--white-color);
 						display: flex;
@@ -129,6 +131,8 @@
 			& > .contents{
 				max-width: 445px;
 				.inner-contents{
+					transform: translate(0, 100px);
+					opacity: 0;
 					h2{
 						margin: 0 0 13px;
 						color: var(--gray-n4-color);
@@ -153,6 +157,8 @@
 				max-width: 1065px;
 				border-radius: 30px;
 				padding: clamp(60px, vw(90px), 90px) clamp(30px, vw(77px), 77px);
+				transform: translate(0, 100px);
+				opacity: 0;
 				.fields{
 					display: flex;
 					row-gap: 10px;
