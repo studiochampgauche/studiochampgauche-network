@@ -63,6 +63,14 @@ const Home = () => {
 
 				}
 
+
+				if(animIntro){
+
+					animIntro.kill();
+					animIntro = null;
+					
+				}
+
 			});
 
 		});
