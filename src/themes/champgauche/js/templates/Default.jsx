@@ -16,7 +16,7 @@ const Default = () => {
 					<div className="items">
 						<div className="item">
 							<span>GitHub</span>
-							<a href="https://github.com/studiochampgauche">@studiochampgauche</a>
+							<a href="https://github.com/studiochampgauche" target="_blank">@studiochampgauche</a>
 						</div>
 						<div className="item">
 							<span>Courriel</span>
