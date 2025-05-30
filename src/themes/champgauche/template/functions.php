@@ -171,6 +171,10 @@ add_action('wp_head', function(){
             &::-webkit-scrollbar {
                 display: none;
             }
+            &::selection{
+                background: var(--theme-color);
+                color: var(--white-color);
+            }
         }
 
         html,
