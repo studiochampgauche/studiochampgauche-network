@@ -40,7 +40,7 @@ const Background = () => {
 
 
             gsap.to(this, .4, {
-                alpha: .1,
+                alpha: 1,
                 ease: 'power4',
                 onComplete: () => {
                     gsap.to(this, .4,{

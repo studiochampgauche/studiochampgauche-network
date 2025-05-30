@@ -72,7 +72,8 @@ section{
 		z-index: 3;
 	}
 	canvas{
-		filter: blur(50px);
+		opacity: .5;
+		filter: blur(100px);
 		z-index: 2;
 		/*.circle{
 			background: radial-gradient(circle, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 100%);
