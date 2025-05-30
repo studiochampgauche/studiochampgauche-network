@@ -13,6 +13,21 @@ const Background = () => {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
+
+    const gradientAnimation = gsap.timeline({
+    	repeat: -1,
+    	ease: 'none'
+    });
+
+    gradientAnimation
+    .to('#bg .top', 4, {
+    	background: '#00B4B6',
+    })
+    .to('#bg .top', 4, {
+    	background: '#B6A700',
+    });
+
+
     let circles = [];
 
     class Circle {
