@@ -50,6 +50,13 @@
 						font-size: 16px;
 						color: var(--white-color);
 					}
+					a{
+						transition-property: opacity;
+						transition-duration: .2s;
+						&:hover{
+							opacity: .6;
+						}
+					}
 				}
 			}
 			p{
