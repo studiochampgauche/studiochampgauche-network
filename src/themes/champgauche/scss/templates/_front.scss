@@ -120,45 +120,4 @@
 			}
 		}
 	}
-	/*&_intro{
-		padding: 103px 32px 32px;
-		height: 100vh;
-		.container{
-			position: relative;
-			display: flex;
-			height: 100%;
-			align-items: center;
-			h1{
-				width: 100%;
-				max-width: 834px;
-				font-size: 75px;
-				line-height: 120%;
-				margin: -100px 0 0;
-				align-self: center;
-				color: var(--white-color);
-			}
-			p{
-				position: absolute;
-				left: 50%;
-				bottom: 32px;
-				width: 100%;
-				max-width: 317px;
-				font-size: 16px;
-				color: var(--white-color);
-			}
-		}
-		@media screen and (min-width: 1920px){
-			padding: 103px vw(32px) 32px;
-		}
-		@media screen and (max-width: 875px){
-			.container{
-				p{
-					//left: initial;
-					//right: 0;
-					//max-width: 202px;
-					//font-size: 14px;
-				}
-			}
-		}
-	}*/
 }
