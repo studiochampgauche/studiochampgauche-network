@@ -16,11 +16,11 @@ const Default = () => {
 					<div className="items">
 						<div className="item">
 							<span>GitHub</span>
-							<a href="https://github.com/studiochampgauche" target="_blank">@studiochampgauche</a>
+							<Link to="https://github.com/studiochampgauche" target="_blank">@studiochampgauche</Link>
 						</div>
 						<div className="item">
 							<span>Courriel</span>
-							<a href="mailto:info@champgauche.studio">info@champgauche.studio</a>
+							<Link to="mailto:info@champgauche.studio">info@champgauche.studio</Link>
 						</div>
 					</div>
 					<p>On fait pas juste des sites. On crée des expériences sur mesure, pour des brands qui veulent sortir du lot.</p>
