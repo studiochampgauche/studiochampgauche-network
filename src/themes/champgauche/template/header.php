@@ -9,8 +9,6 @@
 	<div id="viewport">
 
 		<div id="loader"></div>
-
-		<header></header>
 		
 		<div id="pageWrapper">
 			<div id="pageContent">

@@ -185,6 +185,7 @@ add_action('wp_head', function(){
 
         body{
             background: var(--theme-color);
+            font-family: "mori";
             max-height: 100lvh;
             overflow: hidden;
         }
