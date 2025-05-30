@@ -51,7 +51,10 @@
 						<div class="bottom">
 							<ul>
 								<li>
-									<span>Copyright <?= date('Y'); ?> &copy; siterapide.ca</span>
+									<span>&copy; <?= date('Y'); ?> siterapide.ca</a></span>
+								</li>
+								<li>
+									<span>Développé par <a href="https://studiochampgauche.com" target="_blank">Studio Champ Gauche</span>
 								</li>
 							</ul>
 						</div>
