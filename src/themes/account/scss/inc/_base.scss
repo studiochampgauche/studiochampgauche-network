@@ -1,0 +1,268 @@
+@use './functions' as *;
+
+a{
+	text-decoration: none;
+}
+
+p{
+	margin: 0;
+	font-size: 20px;
+	line-height: 24px;
+}
+
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+	margin: 0;
+	font-weight: 500;
+}
+
+h2{
+	font-size: 60px;
+	line-height: 72px;
+}
+
+section{
+	position: relative;
+}
+
+#viewport{
+	height: 100%;
+	min-height: 100lvh;
+	#pageWrapper{
+		#pageContent{
+			will-change: transform;
+		}
+	}
+}
+
+.container{
+	width: 100%;
+	margin: 0 auto;
+	max-width: 1840px;
+}
+
+.contents{
+	width: 100%;
+	.inner-contents{
+
+	}
+}
+
+.img-container{
+	.inner-img{
+		width: calc(100% + 2px);
+		height: calc(100% + 2px);
+		margin-top: -1px;
+		margin-left: -1px;
+	}
+}
+
+.cbg{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.cobj{
+    object-fit: cover;
+    object-position: center center;
+}
+
+.btn{
+	background: none;
+	position: relative;
+	display: flex;
+	width: 100%;
+	height: clamp(50px, vw(60px), 60px);
+	padding: 0 9px;
+	min-width: clamp(230px, vw(227px), 227px);
+	border-radius: clamp(25px, vw(30px), 30px);
+	border: 1px solid var(--white-color);
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	cursor: pointer;
+	span{
+		font-size: clamp(16px, vw(18px), 18px);
+		font-weight: 500;
+		font-family: 'nm';
+		color: var(--white-color);
+		letter-spacing: 0.02em;
+	}
+	.arrow{
+		background: var(--white-color);
+		position: absolute;
+		display: flex;
+		top: 50%;
+		right: 9px;
+		width: 70px;
+		height: 43px;
+		border-radius: 23px;
+		align-items: center;
+		justify-content: center;
+		transform: translate(0, -50%);
+		svg{
+			width: 35px;
+			height: auto;
+		}
+	}
+	&.has-arrow{
+		justify-content: space-between;
+		padding-left: 40px;
+		svg{
+			transform-origin: center center;
+		}
+	}
+	&.blue{
+		background: var(--theme-color);
+		border-color: var(--theme-color);
+		.arrow{
+			svg{
+				path{
+					fill: var(--theme-color);
+				}
+			}
+		}
+	}
+	&.gray{
+		background: var(--gray-n4-color);
+		border-color: var(--gray-n4-color);
+		.arrow{
+			svg{
+				path{
+					fill: var(--gray-n4-color);
+				}
+			}
+		}
+	}
+	&.white{
+		background: var(--white-color);
+		border-color: var(--white-color);
+		span{
+			color: var(--theme-color);
+		}
+		.arrow{
+			background: var(--theme-color);
+			svg{
+				path{
+					fill: var(--white-color);
+				}
+			}
+		}
+	}
+}
+
+form{
+	.form-message{
+		display: table;
+		width: 100%;
+		font-size: 14px;
+		color: var(--gray-n3-color);
+		margin: 0 0 8px;
+	}
+	#username{
+		display: none;
+	}
+	.fields{
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		row-gap: 30px;
+		.field{
+			width: 100%;
+			label{
+				display: table;
+				font-size: 14px;
+				font-weight: 500;
+				margin: 0 0 7px 5px;
+				color: var(--gray-n3-color);
+			}
+			input,
+			select,
+			textarea,
+			#card-number,
+			#card-expiration,
+			#card-cvc{
+				background: var(--white-color);
+				display: flex;
+				width: 100%;
+				height: 40px;
+				padding: 0 10px;
+				font-family: 'nm';
+				border-radius: 8px;
+				border: 1px solid var(--gray-n2-color);
+				align-items: center;
+				.__PrivateStripeElement{
+					width: 100%;
+				}
+				&.error{
+					border-color: var(--error-color);
+				}
+				& + #card-number,
+				& + #card-expiration,
+				& + #card-cvc{
+					margin: 30px 0 0;
+				}
+			}
+			textarea{
+				padding: 10px;
+				height: 280px;
+				resize: none;
+			}
+			&.split{
+				width: calc(50% - 10px);
+			}
+		}
+	}
+	.btn{
+		background: var(--theme-color);
+		border-color: var(--theme-color);
+		border-radius: 6px;
+		width: fit-content;
+		height: 40px;
+		min-width: 148px;
+		margin: 30px auto 0;
+	}
+	@media screen and (max-width: 1024px){
+		.fields{
+			.field{
+				&.split{
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+#mouser{
+	position: fixed;
+	display: flex;
+	top: 0;
+	left: 0;
+	width: 120px;
+	height: 120px;
+	z-index: 998;
+	align-items: center;
+	justify-content: center;
+	mix-blend-mode: color-dodge;
+	pointer-events: none;
+	.point{
+		background: var(--theme-color);
+		border-radius: 100%;
+		width: 100%;
+		height: 100%;
+		transform: scale(.15);
+	}
+}

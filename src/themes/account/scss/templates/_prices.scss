@@ -1,0 +1,16 @@
+@use '../inc/functions' as *;
+
+#prices{
+	padding: 80px 30px;
+	.bloc{
+		h2{
+			display: table;
+			font-size: 60px;
+			margin: 0 auto 45px;
+			text-align: center;
+		}
+		&+.bloc{
+			margin: 80px 0 0;
+		}
+	}
+}
