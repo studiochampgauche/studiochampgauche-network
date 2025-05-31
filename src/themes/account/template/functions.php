@@ -53,7 +53,12 @@ add_action('wp_enqueue_scripts', function(){
     
     if($data){
 
+        $x = 0;
 	    foreach($data as $k => $v){
+
+
+            if(is_user_logged_in() && in_array($v->ID, [12, 14])) continue;
+
 
 	    	$pageTemplate = implode('', array_map('ucfirst', explode('-', str_replace(['.php', ' '], ['', '-'], get_page_template_slug($v->ID)))));
 
@@ -107,10 +112,11 @@ add_action('wp_enqueue_scripts', function(){
             	unset($acf['media_groups']);
 
 
-            $routes[$k]['acf'] = $acf;
-            $routes[$k]['seo']['og_type'] = 'website';
+            $routes[$x]['acf'] = $acf;
+            $routes[$x]['seo']['og_type'] = 'website';
 
 
+            $x++;
 	    }
 	}
 
