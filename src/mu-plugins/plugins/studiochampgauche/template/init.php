@@ -130,3 +130,33 @@ add_action('template_redirect', function(){
     }
     
 });
+
+
+/*
+* Add to wp_head
+*/
+add_action('wp_head', function(){
+
+    $ga4_code = rwp::field('ga_code');
+
+    if($ga4_code){
+        echo '
+            <script async src="https://www.googletagmanager.com/gtag/js?id='. $ga4_code .'"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+
+                // Initialisation avec le mode sans cookie
+                gtag("js", new Date());
+
+                gtag("config", "'. $ga4_code .'", {
+                    "storage": "none",
+                    "client_storage": "none",
+                    "anonymize_ip": true,
+                    "cookie_flags": ""
+                });
+            </script>
+        ';
+    }
+
+}, 3);

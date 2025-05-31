@@ -131,6 +131,27 @@ class Render{
 					'ajax' => 0,
 					'placeholder' => '',
 				),
+				array(
+                    'key' => 'field_67s9983271gy90h4378hbrf',
+                    'label' => 'Google Analytics Code',
+                    'name' => 'ga_code',
+                    'aria-label' => '',
+                    'type' => 'text',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '33.3333333333',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => '',
+                    'maxlength' => '',
+                    'allow_in_bindings' => 0,
+                    'placeholder' => '',
+                    'prepend' => '',
+                    'append' => ''
+                ),
 			),
 			'location' => array(
 				array(
