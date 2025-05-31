@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Connexion from './account/Connexion';
-import Inscription from './account/Inscription';
 import Recover from './account/Recover';
 import RecoverLast from './account/RecoverLast';
 import Dashboard from './account/Dashboard';
@@ -203,7 +202,6 @@ const Default = () => {
 							{location.pathname === '/profil/' && <Edit />}
 							{location.pathname === '/mes-sites/' && <Sites />}
 							{location.pathname === '/mes-abonnements/' && <Subscriptions />}
-							{location.pathname === '/inscription/' && <Inscription />}
 							{location.pathname === '/support/' && <Support />}
 						</div>
 					</div>

@@ -55,8 +55,6 @@ add_action('wp_enqueue_scripts', function(){
 
 	    foreach($data as $k => $v){
 
-            if(!rwp::field('can_register_users', 'user_' . get_current_user_id()) && is_page('inscription')) continue;
-
 	    	$pageTemplate = implode('', array_map('ucfirst', explode('-', str_replace(['.php', ' '], ['', '-'], get_page_template_slug($v->ID)))));
 
 
@@ -192,7 +190,7 @@ add_action('wp_enqueue_scripts', function(){
 */
 add_action('template_redirect', function(){
 
-    if(is_404() || is_search() || (!rwp::field('can_register_users', 'user_' . get_current_user_id()) && is_page('inscription')) || (is_user_logged_in() && is_page(['mdp-perdu', 'change-mdp']))){
+    if(is_404() || is_search() || (is_user_logged_in() && is_page(['mdp-perdu', 'change-mdp']))){
 
         wp_redirect(home_url());
 
