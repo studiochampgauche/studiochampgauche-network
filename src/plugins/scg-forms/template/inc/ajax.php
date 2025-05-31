@@ -396,17 +396,13 @@ function rwpforms(){
             if($fieldValue){
                 foreach ($fieldValue['tmp_name'] as $l => $w) {
                             
-                    $code = getenv('SECRET_SALT');
-                    $code = str_shuffle($code);
-                    $code = substr($code, 0, 12);
-                    $code = '-'.str_shuffle($code);
-
+                    $code = hash_hmac('sha256', $filename . ':' . time(), getenv('SECRET_SALT'));
 
                     $info = pathinfo($fieldValue['name'][$l]);
                     $ext = $info['extension'];
                     $filename = sanitize_file_name($info['filename']);
 
-                    $newFilename = $filename . $code . '.'.$ext;
+                    $newFilename = $filename . '-' . $code . '.'.$ext;
 
 
                     $dir = __DIR__ . '/data/file/site/' . get_current_blog_id();
