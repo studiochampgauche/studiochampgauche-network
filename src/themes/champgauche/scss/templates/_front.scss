@@ -69,6 +69,14 @@
 				color: var(--white-color);
 			}
 		}
+		@media screen and (min-width: 1920px){
+			h1{
+				left: vw(32px);
+				width: calc(100% - vw(64px));
+				max-width: vw(834px);
+				font-size: vw(75px);
+			}
+		}
 		@media screen and (max-width: 1440px){
 			h1{
 				font-size: 60px;
