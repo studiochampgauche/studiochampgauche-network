@@ -4,7 +4,8 @@
 		</div>
 		<div id="bg">
 			<div class="back"></div>
-			<canvas></canvas>
+			<canvas id="gradient"></canvas>
+			<canvas id="plate"></canvas>
 			<div class="top"></div>
 			<div class="screen"></div>
 		</div>

@@ -9,7 +9,8 @@ window.loader = {
 		app: false,
 		gscroll: false,
 		medias: false,
-		fonts: false
+		fonts: false,
+		scene: false,
 	}
 }
 
@@ -51,6 +52,10 @@ const Loader = {
 					||
 
 					!window.loader.isLoaded.fonts
+
+					//||
+
+					//!window.loader.isLoaded.scene
 				){
 
 					tl.restart();

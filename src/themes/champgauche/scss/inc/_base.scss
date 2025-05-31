@@ -69,11 +69,15 @@ section{
 	.top{
 		background: #B6A700;
 		mix-blend-mode: multiply;
-		z-index: 3;
+		z-index: 4;
 	}
-	canvas{
+	#gradient{
 		filter: blur(50px);
 		z-index: 2;
+	}
+	#plate{
+		z-index: 3;
+		mix-blend-mode: soft-light;
 	}
 	.back{
 		background: var(--black-color);
@@ -82,6 +86,6 @@ section{
 	.screen{
 		background: var(--theme-color);
 		mix-blend-mode: screen;
-		z-index: 4;
+		z-index: 5;
 	}
 }
