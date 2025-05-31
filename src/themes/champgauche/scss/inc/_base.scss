@@ -68,25 +68,12 @@ section{
 	}
 	.top{
 		background: #B6A700;
-		mix-blend-mode: darken;
+		mix-blend-mode: multiply;
 		z-index: 3;
 	}
 	canvas{
-		opacity: .5;
 		filter: blur(50px);
 		z-index: 2;
-		/*.circle{
-			background: radial-gradient(circle, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 100%);
-			position: absolute;
-			display: block;
-			content: "";
-			top: 50%;
-			left: 50%;
-			aspect-ratio: 1 / 1;
-			border-radius: 100%;
-			transform: translate(-50%, -50%);
-			filter: blur(50px);
-		}*/
 	}
 	.back{
 		background: var(--black-color);
@@ -96,21 +83,5 @@ section{
 		background: var(--theme-color);
 		mix-blend-mode: screen;
 		z-index: 4;
-	}
-	@media screen and (orientation: portrait){
-		canvas{
-			/*.circle{
-				width: 50%;
-				height: auto;
-			}*/
-		}
-	}
-	@media screen and (orientation: landscape){
-		canvas{
-			/*.circle{
-				width: auto;
-				height: 50%;
-			}*/
-		}
 	}
 }
