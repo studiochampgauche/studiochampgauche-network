@@ -16,11 +16,12 @@
 		.inner{
 			display: flex;
 			flex-wrap: wrap;
+			row-gap: 65px;
 			width: 100%;
 			height: 100%;
 			margin: 0 auto;
-			padding: 27px 0 40px;
 			max-width: 280px;
+			padding: 27px 0 40px;
 			align-content: space-between;
 			.top{
 				width: 100%;
@@ -194,6 +195,7 @@
 			.dashboard{
 				.quick-links{
 					display: grid;
+					grid-row-gap: 20px;
 					grid-column-gap: 20px;
 					grid-template-columns: repeat(3, 1fr);
 					a{
@@ -715,6 +717,91 @@
 						}
 					}
 				}
+			}
+		}
+	}
+	@media screen and (max-width: 1440px){
+		.view{
+			.bottom{
+				.dashboard{
+					.quick-links{
+						grid-template-columns: repeat(2, 1fr);
+						a{
+							&:last-child{
+								grid-column: 1 / 3;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 1280px){
+		.view{
+			.bottom{
+				.dashboard{
+					.quick-links{
+						grid-template-columns: 100%;
+						a{
+							&:last-child{
+								grid-column: initial;
+							}
+						}
+					}
+				}
+				.sites{
+					.list{
+						grid-template-columns: 100%;
+					}
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 992px){
+		.side{
+			width: clamp(260px, vw(320px, 992px), 320px);
+			flex: 0 0 clamp(260px, vw(320px, 992px), 320px);
+		}
+	}
+	@media screen and (max-width: 768px){
+		.side{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 60px;
+			flex: 0 0 100%;
+			border-radius: 0;
+			overflow: hidden;
+			z-index: 2;
+			.inner{
+				height: initial;
+				padding-top: 0;
+				margin: 0;
+				.top{
+					.logo{
+						padding: 14px 0;
+						svg{
+							margin: 0;
+						}
+					}
+				}
+			}
+		}
+		.view{
+			padding: clamp(100px, vw(120px, 768px), 120px) clamp(20px, vw(40px, 768px), 40px) 60px;
+			.top{
+				display: none;
+			}
+			.bottom{
+
+			}
+		}
+	}
+	@media screen and (max-height: 567px){
+		.side{
+			.inner{
+				height: initial;
 			}
 		}
 	}

@@ -142,6 +142,7 @@ add_action('wp_enqueue_scripts', function(){
     	$sites[] = [
     		'id' => $site->userblog_id,
     		'domain' => $site->domain,
+            'domain_excerpt' => wp_html_excerpt($site->domain, 28, '...'),
     		'name' => $site->blogname,
             'url' => get_site_url($site->userblog_id),
             'admin_url' => get_admin_url($site->userblog_id),
