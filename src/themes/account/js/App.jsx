@@ -9,8 +9,6 @@ import PageTransition from './inc/PageTransition';
 import Metas from './inc/Metas';
 import './inc/Loader';
 import './inc/Scroller';
-//import './inc/Ham';
-//import './inc/Mouse';
 
 const templates = {
     DefaultTemplate,
