@@ -54,6 +54,12 @@ const Ham = {
                     openAnim.kill();
                     openAnim = null;
 
+                    gsap.set(headerElement, {
+                        height: 60
+                    });
+
+                    hamElement.classList.remove('active');
+
                 }
 
             }
