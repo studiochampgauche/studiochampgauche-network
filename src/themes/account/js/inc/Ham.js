@@ -6,6 +6,8 @@ import { CustomEase } from 'gsap/CustomEase';
 const Ham = {
     init: () => {
 
+        if(window.innerWidth > 768) return;
+        
         const headerElement = document.querySelector('.side');
         const hamElement = headerElement?.querySelector('.ham-menu');
 
