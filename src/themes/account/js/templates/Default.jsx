@@ -206,7 +206,7 @@ const Default = () => {
 					</div>
 					<div className="view">
 						<div className="top">
-							<span>{USER.firstname ? `Bonjour ${USER.firstname}` : 'Bonjour,'}</span>
+							{USER.firstname && (<span>{`Bonjour ${USER.firstname}`}</span>)}
 						</div>
 						<div className="bottom">
 							<div className="intro">
