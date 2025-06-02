@@ -320,7 +320,7 @@ add_action('wp_ajax_nopriv_recover-last-step', function(){
 
     }
 
-    $recoveryInfo = rwp::field('recovery');
+    $recoveryInfo = rwp::field('recovery', 'user_' . $user->ID);
 
     if(!isset($recoveryInfo['code']) || !isset($recoveryInfo['time'])){
 
