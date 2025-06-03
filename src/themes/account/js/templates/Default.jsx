@@ -11,6 +11,7 @@ import Edit from './account/Edit';
 import Sites from './account/Sites';
 import Support from './account/Support';
 import Subscriptions from './account/Subscriptions';
+import Affiliates from './account/Affiliates';
 import Ham from '../inc/Ham';
 
 const Default = () => {
@@ -48,6 +49,10 @@ const Default = () => {
 		"/support/": {
 			title: 'Support',
 			text: 'Besoin d\'aide ?'
+		},
+		"/programme-affilie/": {
+			title: 'Programme affilié',
+			text: 'Ajoutez des utilisateurs. Obtenez de l\'argent.'
 		}
 	};
 	
@@ -179,6 +184,16 @@ const Default = () => {
 											<span>Abonnements</span>
 										</Link>
 									</li>
+									{USER.affiliates?.active && (
+										<li data-is="/programme-affilie/">
+											<Link to="/programme-affilie/">
+												<div className="icon">
+													<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="22.7" height="20" viewBox="0 0 22.7 20"><g><path d="M17.2,3.5h3.8c.2,0,.8.3,1,.5,1.2,1,.5,3.5.7,4.9,0,.7-.4,1.3-.9,1.8v7.4c-.1,1.1-.9,1.8-2,1.8H2.9c-.9,0-1.6-.6-1.9-1.5-.1-2.6,0-5.2,0-7.8C-.5,9.3.2,7.1,0,5.4c0-.8.9-1.8,1.7-1.8h3.8v-1.5c0-.9.7-1.8,1.6-2,2.7-.1,5.4,0,8.2,0,.8,0,1.8,1,1.8,1.9v1.6ZM15.8,3.5v-1.6c0-.2-.4-.6-.7-.6-2.6,0-5.2,0-7.8,0-.2,0-.5.4-.5.6v1.4h0c0,0,8.9,0,8.9,0ZM13.7,12c1.5-.1,3.1-.3,4.6-.8s3-1.1,3.1-2.3c0-1.1,0-2.3,0-3.4s-.2-.5-.5-.6H2c-.3,0-.6.3-.6.5,0,1.1,0,2.3,0,3.3s2.5,2.2,3.7,2.6,2.7.5,4,.6v-.8c0-.2.4-.5.6-.5,1.1-.1,2.4,0,3.5,0,.2,0,.5.3.5.5v.8ZM2.3,11.7v6.5s0,.2.1.2c.1.2.4.3.6.3h16.8c.2,0,.7-.3.7-.5v-6.5c-2.1,1.1-4.5,1.4-6.8,1.6-.5,2.4-4,2.4-4.5,0-2.3-.2-4.7-.5-6.8-1.6ZM12.3,12h-1.9v1s0,.2.1.3c.3.6,1.3.6,1.7,0s.1-.3.1-.3v-1.1Z"/></g></svg>
+												</div>
+												<span>Programme affilié</span>
+											</Link>
+										</li>
+									)}
 								</ul>
 							</div>
 							<div className="bottom">
@@ -222,6 +237,7 @@ const Default = () => {
 							{location.pathname === '/mes-sites/' && <Sites />}
 							{location.pathname === '/mes-abonnements/' && <Subscriptions />}
 							{location.pathname === '/support/' && <Support />}
+							{location.pathname === '/programme-affilie/' && <Affiliates />}
 						</div>
 					</div>
 				</div>

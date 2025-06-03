@@ -51,13 +51,25 @@ add_action('wp_enqueue_scripts', function(){
         'posts_per_page' => -1
     ])->posts;
     
+    $user = wp_get_current_user();
+    $affiliates = rwp::field('affiliates', 'user_' . $user->ID);
+    $isAffiliated = isset($affiliates['active']) ? $affiliates['active'] : false;
+
+
     if($data){
 
         $x = 0;
 	    foreach($data as $k => $v){
 
 
-            if(is_user_logged_in() && in_array($v->ID, [12, 14])) continue;
+            if(
+                (is_user_logged_in() && in_array($v->ID, [12, 14]))
+
+                ||
+
+                (!$isAffiliated && in_array($v->ID, [35]))
+
+            ) continue;
 
 
 	    	$pageTemplate = implode('', array_map('ucfirst', explode('-', str_replace(['.php', ' '], ['', '-'], get_page_template_slug($v->ID)))));
@@ -126,7 +138,6 @@ add_action('wp_enqueue_scripts', function(){
     /*
     * Current user Data
     */
-    $user = wp_get_current_user();
     $userSites = get_blogs_of_user($user->ID);
     unset($userSites[1]);
     unset($userSites[2]);
@@ -177,6 +188,7 @@ add_action('wp_enqueue_scripts', function(){
     	'phone' => rwp::field('phone', 'user_' . $user->ID),
     	'company' => rwp::field('company', 'user_' . $user->ID),
     	'addr' => rwp::field('address', 'user_' . $user->ID),
+        'affiliates' => $affiliates,
     	'sites' => $sites
     ] : [];
 
@@ -197,7 +209,7 @@ add_action('wp_enqueue_scripts', function(){
 */
 add_action('template_redirect', function(){
 
-    if(is_404() || is_search() || (is_user_logged_in() && is_page(['mdp-perdu', 'change-mdp']))){
+    if(is_404() || is_search() || (is_user_logged_in() && is_page([12, 14])) || (!rwp::field('affiliates_active', 'user_' . get_current_user_id()) && is_page([35]))){
 
         wp_redirect(home_url());
 
