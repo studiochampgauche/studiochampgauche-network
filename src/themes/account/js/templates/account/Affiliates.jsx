@@ -18,10 +18,11 @@ const Affiliates = () => {
 		let total = 0,
 			due = 0;
 
-		
+
 		USER.affiliates?.history?.forEach(item => {
 
-			total += item.assigned;
+			if(item.status !== 'pendding')
+				total += item.assigned;
 
 			if(item.status === 'approved')
 				due += item.assigned;
