@@ -84,6 +84,8 @@ section{
 	min-width: clamp(230px, vw(227px), 227px);
 	border-radius: clamp(25px, vw(30px), 30px);
 	border: 1px solid var(--white-color);
+	transition-property: background, border-color;
+	transition-duration: .2s, .2s;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
@@ -93,6 +95,8 @@ section{
 		font-weight: 500;
 		font-family: 'nm';
 		color: var(--white-color);
+		transition-property: color;
+		transition-duration: .2s;
 		letter-spacing: 0.02em;
 	}
 	.arrow{
@@ -154,6 +158,13 @@ section{
 					fill: var(--white-color);
 				}
 			}
+		}
+	}
+	&:hover{
+		background: var(--theme-n2-color) !important;
+		border-color: var(--theme-n2-color) !important;
+		span{
+			color: var(--white-color) !important;
 		}
 	}
 }
