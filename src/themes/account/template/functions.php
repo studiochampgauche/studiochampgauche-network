@@ -230,6 +230,7 @@ add_action('wp_head', function(){
             --white-color: #fff;
             --black-color: #000;
             --theme-color: #214CF3;
+            --theme-n2-color: #0B34B7;
             --gray-n1-color: #EFEFEF;
             --gray-n2-color: #CCCCCC;
             --gray-n3-color: #777777;
