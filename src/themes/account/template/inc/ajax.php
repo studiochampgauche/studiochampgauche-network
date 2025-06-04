@@ -1309,7 +1309,7 @@ add_action('wp_ajax_affiliates', function(){
         'history' => $histories
     ], 'user_' . $user->ID);
 
-    
+
 
     echo wp_json_encode([
         'status' => 'success',
@@ -1329,14 +1329,14 @@ add_action('wp_ajax_affiliates', function(){
             ',
             'to' => $user->user_email
         ],
-        /*[
-            'subject' => 'Votre compte siterapide.ca',
+        [
+            'subject' => 'Vous avez un nouveau lead',
             'body' => '
-                <p style="margin-bottom: 8px;">Bonjour '. $firstname .',</p>
-                <p style="margin-bottom: 8px;">Bienvenue chez siterapide.ca</p>
+                <p style="margin-bottom: 8px;">Bonjour,</p>
+                <p style="margin-bottom: 8px;">Un nouveau lead est entré sur HubSpot.</p>
             ',
-            'to' => $email
-        ]*/
+            'to' => 'info@siterapide.ca'
+        ]
     ];
 
     foreach($mails as $mail){
