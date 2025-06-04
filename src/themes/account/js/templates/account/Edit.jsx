@@ -58,7 +58,7 @@ const Edit = () => {
 			/*
 			* Check company
 			*/
-			if(fieldsRef.current.company.value.length && (fieldsRef.current.company.value.length > 25 || window.countWords(fieldsRef.current.company.value) > 3))
+			if(fieldsRef.current.company.value.length < 3 || fieldsRef.current.company.value.length > 25 || window.countWords(fieldsRef.current.company.value) > 3)
 				fieldsRef.current.company.classList.add('error');
 			else
 				fieldsRef.current.company.classList.remove('error');
