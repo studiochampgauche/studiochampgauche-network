@@ -1228,12 +1228,22 @@ add_action('wp_ajax_affiliates', function(){
     }
 
 
+    $dealPrice = null
+    ;
+    if($package === 'small-budget')
+        $dealPrice = '499';
+    elseif($package === 'multi-sections')
+        $dealPrice = '499';
+    elseif($package === 'multi-sections')
+        $dealPrice = '799';
+
+
     $dealInput = new \HubSpot\Client\Crm\Deals\Model\SimplePublicObjectInput();
     $dealInput->setProperties([
         'dealname'  => 'Deal pour ' . $firstname . ' ' . $lastname,
         'pipeline'  => 'default',
         'dealstage' => 'qualifiedtobuy',
-        'amount'    => '1500'
+        'amount'    => $dealPrice
     ]);
 
     try {
