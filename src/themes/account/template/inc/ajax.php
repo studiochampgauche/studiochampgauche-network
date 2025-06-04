@@ -470,23 +470,15 @@ add_action('wp_ajax_edit-contact', function(){
 
         ||
 
-        (
-            $company
+        strlen($company) < 3
 
-            &&
+        ||
 
-            (
-                strlen($company) < 3
+        strlen($company) > 25
 
-                ||
+        ||
 
-                strlen($company) > 25
-
-                ||
-
-                str_word_count($company) > 3
-            )
-        )
+        str_word_count($company) > 3
 
         ||
 
@@ -920,6 +912,7 @@ add_action('wp_ajax_edit-billing-addr', function(){
         'city' => $city,
         'province' => $province,
         'postal_code' => $postal_code,
+        'country' => 'CA'
     ];
 
     update_field('field_6834330405d36', $args, 'user_' . $user->ID);
@@ -1087,6 +1080,283 @@ add_action('wp_ajax_support', function(){
         ]);
 
     }
+
+    exit;
+
+});
+
+
+/*
+* Affiliates form
+*/
+add_action('wp_ajax_affiliates', function(){
+
+
+    $data = $_POST;
+
+    $keys = [
+        'action',
+        'firstname',
+        'lastname',
+        'email',
+        'phone',
+        'company',
+        'package'
+    ];
+
+    if(count($data) !== count($keys)) return;
+    
+    foreach ($keys as $key) {
+
+        if(!isset($data[$key]) || !is_string($data[$key])) return;
+
+        $data[$key] = wp_strip_all_tags($data[$key]);
+
+    }
+
+    
+    $user = wp_get_current_user();
+
+    $firstname = $data['firstname'];
+    $lastname = $data['lastname'];
+    $email = $data['email'];
+    $phone = $data['phone'];
+    $company = $data['company'];
+    $package = $data['package'];
+
+    
+    if(
+        strlen($firstname) < 3
+
+        ||
+
+        strlen($firstname) > 25
+
+        ||
+
+        str_word_count($firstname) > 3
+
+        ||
+
+        strlen($lastname) < 3
+
+        ||
+
+        strlen($lastname) > 25
+
+        ||
+
+        str_word_count($lastname) > 3
+
+        ||
+
+        strlen($company) < 3
+
+        ||
+
+        strlen($company) > 25
+
+        ||
+
+        str_word_count($company) > 3
+
+        ||
+
+        !filter_var($email, FILTER_VALIDATE_EMAIL)
+
+        ||
+
+        !preg_match('/^\(\d{3}\) \d{3}-\d{4}$/', $phone)
+
+        ||
+
+        !in_array($package, ['multi-sections', 'multi-pages', 'small-budget'])
+
+        ||
+
+        !rwp::field('affiliates_active', 'user_' . $user->ID)
+        
+    ) return;
+
+
+    /*
+    * Check if new user exist
+    */
+    $newUser = get_user_by('email', $email);
+
+    if($newUser){
+
+        echo wp_json_encode([
+            'status' => 'error',
+            'message' => 'Cette utilisateur est déjà inscrit dans notre base de données. Vous devez nous contacter si vous voulez le référer.'
+        ]);
+
+
+        exit;
+
+    }
+
+
+    require_once 'composer/vendor/autoload.php';
+
+
+    $hubspot = \HubSpot\Factory::createWithAccessToken(getenv('HUBSPOT_TOKEN'));
+
+    $contactInput = new \HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput();
+    $contactInput->setProperties([
+        'email' => $email,
+        'firstname' => $firstname,
+        'lastname' => $lastname,
+        'phone' => $phone,
+        'company' => $company
+    ]);
+
+    try{
+
+        $contact = $hubspot->crm()->contacts()->basicApi()->create($contactInput);
+        $contactId = $contact->getId();
+
+    } catch (ApiException $e) {
+
+        echo wp_json_encode([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ]);
+
+        exit;
+
+    }
+
+
+    $dealInput = new \HubSpot\Client\Crm\Deals\Model\SimplePublicObjectInput();
+    $dealInput->setProperties([
+        'dealname'  => 'Deal pour ' . $firstname . ' ' . $lastname,
+        'pipeline'  => 'default',
+        'dealstage' => 'qualifiedtobuy',
+        'amount'    => '1500'
+    ]);
+
+    try {
+
+        $deal = $hubspot->crm()->deals()->basicApi()->create($dealInput);
+        $dealId = $deal->getId();
+
+    } catch (\HubSpot\Client\Crm\Deals\ApiException $e) {
+
+        echo wp_json_encode([
+            'status'  => 'error',
+            'message' => $e->getMessage()
+        ]);
+
+        exit;
+
+    }
+
+
+    $associationSpec1 = new \HubSpot\Client\Crm\Associations\V4\Model\AssociationSpec([
+        'association_category' => 'HUBSPOT_DEFINED',
+        'association_type_id' => 3
+    ]);
+
+    $from1 = new \HubSpot\Client\Crm\Associations\V4\Model\PublicObjectId([
+        'id' => $dealId
+    ]);
+
+    $to1 = new \HubSpot\Client\Crm\Associations\V4\Model\PublicObjectId([
+        'id' => $contactId
+    ]);
+
+    $publicAssociationMultiPost1 = new \HubSpot\Client\Crm\Associations\V4\Model\PublicAssociationMultiPost([
+        'types' => [$associationSpec1],
+        'from' => $from1,
+        'to' => $to1
+    ]);
+
+    $batchInputPublicAssociationMultiPost = new \HubSpot\Client\Crm\Associations\V4\Model\BatchInputPublicAssociationMultiPost([
+        'inputs' => [$publicAssociationMultiPost1],
+    ]);
+
+    try {
+
+        $association = $hubspot->crm()->associations()->v4()->batchApi()->create('deals', 'contacts', $batchInputPublicAssociationMultiPost);
+
+    } catch (\HubSpot\Client\Crm\Associations\V4\ApiException $e) {
+
+        echo wp_json_encode([
+            'status'  => 'error',
+            'message' => $e->getMessage()
+        ]);
+
+        exit;
+
+    }
+
+
+    $affiliates = rwp::field('affiliates', 'user_' . $user->ID);
+
+    $histories = $affiliates['history'] ? $affiliates['history'] : [];
+
+    $package_slug = str_replace('-', '_', $package);
+
+    $histories = array_merge([[
+        'name' => $company,
+        'package' => $package_slug,
+        'assigned' => $affiliates['prices'][$package_slug],
+        'status' => 'pending'
+    ]], $histories);
+
+    update_field('field_683e089579085', [
+        'history' => $histories
+    ], 'user_' . $user->ID);
+
+    
+
+    echo wp_json_encode([
+        'status' => 'success',
+        'message' => 'Ajouté avec succès.'
+    ]);
+    
+
+    /*
+    * Send emails
+    */
+    $mails = [
+        [
+            'subject' => 'Programme affilié',
+            'body' => '
+                <p style="margin-bottom: 8px;">Bonjour '. $user->user_firstname .',</p>
+                <p style="margin-bottom: 8px;">'. $firstname . ' ' . $lastname .' a bien été ajouté à votre programme.</p>
+            ',
+            'to' => $user->user_email
+        ],
+        /*[
+            'subject' => 'Votre compte siterapide.ca',
+            'body' => '
+                <p style="margin-bottom: 8px;">Bonjour '. $firstname .',</p>
+                <p style="margin-bottom: 8px;">Bienvenue chez siterapide.ca</p>
+            ',
+            'to' => $email
+        ]*/
+    ];
+
+    foreach($mails as $mail){
+        $headers = [];
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf-8';
+        $headers[] = 'From: siterapide.ca <nepasrepondre@siterapide.ca>';
+
+        $body = '
+            <html>
+                <head>
+                    <title>'. $mail['subject'] .'</title>
+                </head>
+                <body>'. $mail['body'] .'</body>
+            </html>
+        ';
+
+        wp_mail($mail['to'], $mail['subject'], $body, implode("\r\n", $headers));
+    }
+
 
     exit;
 

@@ -67,7 +67,7 @@ add_action('wp_enqueue_scripts', function(){
 
                 ||
 
-                (!$isAffiliated && in_array($v->ID, [35]))
+                (!$isAffiliated && in_array($v->ID, [30, 35]))
 
             ) continue;
 
@@ -209,7 +209,7 @@ add_action('wp_enqueue_scripts', function(){
 */
 add_action('template_redirect', function(){
 
-    if(is_404() || is_search() || (is_user_logged_in() && is_page([12, 14])) || (!rwp::field('affiliates_active', 'user_' . get_current_user_id()) && is_page([35]))){
+    if(is_404() || is_search() || (is_user_logged_in() && is_page([12, 14])) || (!rwp::field('affiliates_active', 'user_' . get_current_user_id()) && is_page([30, 35]))){
 
         wp_redirect(home_url());
 

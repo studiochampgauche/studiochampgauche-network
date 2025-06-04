@@ -7,11 +7,20 @@ const Affiliates = () => {
 
 	const formRef = useRef(null);
 	const formDivRef = useRef(null);
+	const formInputs = useRef({
+		firstname: null,
+		lastname: null,
+		email: null,
+		phone: null,
+		company: null,
+		package: null
+	});
 	const registrationBtnRef = useRef(null);
 	const cancelBtn = useRef(null);
 
 	const [totalWinnings, setTotalWinnings] = useState(0);
 	const [amountDue, setAmountDue] = useState(0);
+	const [formMessage, setFormMessage] = useState(null);
 
 
 	useEffect(() => {
@@ -23,7 +32,7 @@ const Affiliates = () => {
 			due = 0;
 
 
-		USER.affiliates?.history?.forEach(item => {
+		(USER?.affiliates?.history || []).forEach(item => {
 
 			if(!['pending', 'rejected'].includes(item.status))
 				total += parseFloat(item.assigned);
@@ -77,11 +86,134 @@ const Affiliates = () => {
 
 			e.preventDefault();
 
-			console.log('submit');
+			/*
+			* Check firstname
+			*/
+			if(formInputs.current.firstname.value.length < 3 || formInputs.current.firstname.value.length > 25 || window.countWords(formInputs.current.firstname.value) > 3)
+				formInputs.current.firstname.classList.add('error');
+			else
+				formInputs.current.firstname.classList.remove('error');
+
+
+			/*
+			* Check lastname
+			*/
+			if(formInputs.current.lastname.value.length < 3 || formInputs.current.lastname.value.length > 25 || window.countWords(formInputs.current.lastname.value) > 3)
+				formInputs.current.lastname.classList.add('error');
+			else
+				formInputs.current.lastname.classList.remove('error');
+
+
+
+			/*
+			* Check email
+			*/
+			if(!window.emailCheck(formInputs.current.email.value))
+	            formInputs.current.email.classList.add('error');
+	        else
+	            formInputs.current.email.classList.remove('error');
+
+
+	        /*
+			* Check phone
+			*/
+			if(!window.phoneCheck(formInputs.current.phone.value))
+	            formInputs.current.phone.classList.add('error');
+	        else
+	            formInputs.current.phone.classList.remove('error');
+
+
+	        /*
+			* Check company
+			*/
+			if(formInputs.current.company.value.length < 3 || formInputs.current.company.value.length > 25 || window.countWords(formInputs.current.company.value) > 3)
+				formInputs.current.company.classList.add('error');
+			else
+				formInputs.current.company.classList.remove('error');
+
+
+
+			/*
+			* Check Package
+			*/
+			if(formInputs.current.package.value === 'none')
+				formInputs.current.package.classList.add('error');
+			else
+				formInputs.current.package.classList.remove('error');
+
+
+	        if(formRef.current.querySelector('.error')) return;
+
+	        canSubmit = false;
+
+	        formRef.current.style.opacity = .6;
+	        formRef.current.style.pointerEvents = 'none';
+
+	        const formData = new FormData();
+	        formData.append('action', 'affiliates');
+	        formData.append('firstname', formInputs.current.firstname.value);
+	        formData.append('lastname', formInputs.current.lastname.value);
+	        formData.append('email', formInputs.current.email.value);
+	        formData.append('phone', formInputs.current.phone.value);
+	        formData.append('company', formInputs.current.company.value);
+	        formData.append('package', formInputs.current.package.value);
+
+
+	        fetch(SYSTEM.ajaxPath, {
+	        	method: 'POST',
+	        	body: formData
+	        })
+	        .then(resp => resp.json())
+	        .then(data => {
+
+
+	        	setFormMessage(data.message);
+
+	        	if(data.status !== 'success') {
+
+	        		canSubmit = true;
+
+		        	formRef.current.style.opacity = 1;
+		        	formRef.current.style.pointerEvents = 'initial';
+
+		        	return;
+
+		        }
+
+		        window.location.reload();
+
+	        	formInputs.current.firstname.value = '';
+	        	formInputs.current.lastname.value = '';
+	        	formInputs.current.email.value = '';
+	        	formInputs.current.phone.value = '';
+	        	formInputs.current.company.value = '';
+	        	formInputs.current.package.value = 'none';
+
+	        });
 
 		}
 
 		formRef.current.addEventListener('submit', handleRegistrationSubmit);
+
+
+		const mask = () => {
+
+			if(formInputs.current.phone){
+
+				const phoneInputHandle = (e) => {
+
+					const x = formInputs.current.phone.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+                    formInputs.current.phone.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+
+				}
+                formInputs.current.phone.addEventListener('input', phoneInputHandle);
+
+                killEvents.push(() => formInputs.current.phone?.removeEventListener('input', phoneInputHandle));
+                
+            }
+
+		}
+		mask();
 
 
 		killEvents.push(() => {
@@ -148,27 +280,27 @@ const Affiliates = () => {
 								<div className="fields">
 									<div className="field split">
 										<label htmlFor="firstname">Prénom*</label>
-										<input type="text" id="firstname" autoComplete="given-name" required />
+										<input ref={(el) => (formInputs.current.firstname = el)} type="text" id="firstname" autoComplete="given-name" required />
 									</div>
 									<div className="field split">
 										<label htmlFor="lastname">Nom de famille*</label>
-										<input type="text" id="lastname" autoComplete="family-name" required />
+										<input ref={(el) => (formInputs.current.lastname = el)} type="text" id="lastname" autoComplete="family-name" required />
 									</div>
 									<div className="field split">
 										<label htmlFor="email">Courriel*</label>
-										<input type="email" id="email" autoComplete="email" required />
+										<input ref={(el) => (formInputs.current.email = el)} type="email" id="email" autoComplete="email" required />
 									</div>
 									<div className="field split">
 										<label htmlFor="phone">Téléphone*</label>
-										<input type="tel" id="phone" autoComplete="tel" required />
+										<input ref={(el) => (formInputs.current.phone = el)} type="tel" id="phone" autoComplete="tel" required />
 									</div>
 									<div className="field split">
-										<label htmlFor="phone">Nom d'entreprise*</label>
-										<input type="text" id="company" autoComplete="company" required />
+										<label htmlFor="company">Nom d'entreprise*</label>
+										<input ref={(el) => (formInputs.current.company = el)} type="text" id="company" autoComplete="company" required />
 									</div>
 									<div className="field split">
 										<label htmlFor="package">Forfait voulu*</label>
-										<select id="package" defaultValue="none">
+										<select ref={(el) => (formInputs.current.package = el)} id="package" defaultValue="none">
 											<option value="none">Choisir un forfait</option>
 											<option value="multi-sections">Multi-sections</option>
 											<option value="multi-pages">Multi-pages</option>
@@ -177,6 +309,7 @@ const Affiliates = () => {
 									</div>
 								</div>
 							</div>
+							{formMessage && (<p className="form-message">{formMessage}</p>)}
 							<div className="buttons">
 								<button type="submit" className="btn">
 									<span>Ajouter</span>
