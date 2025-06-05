@@ -92,10 +92,10 @@ add_action('rest_api_init', function(){
             $signature = $_SERVER['HTTP_X_HUBSPOT_SIGNATURE_V3'];
             $timestamp = $_SERVER['HTTP_X_HUBSPOT_REQUEST_TIMESTAMP'];
 
-            // Calcul de la signature attendue
+            
             $computed_signature = base64_encode(hash_hmac('sha256', 'POSThttps://moncompte.siterapide.ca/wp-json/siterapide/v1/hubspot-create-user'.$payload.$timestamp, $secret, true));
 
-            // Vérification sécurisée
+            
             if ($computed_signature !== $signature) {
 
                 http_response_code(401);
