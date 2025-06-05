@@ -2,7 +2,7 @@
 
 add_action('rest_api_init', function(){
 
-    register_rest_route('siterapide/v1', 'subscription-update', [
+    register_rest_route('siterapide/v1', 'stripe', [
         'methods' => 'POST',
         'callback' => function(){
 
@@ -15,16 +15,18 @@ add_action('rest_api_init', function(){
             // If you are testing your webhook locally with the Stripe CLI you
             // can find the endpoint's secret by running `stripe listen`
             // Otherwise, find your endpoint's secret in your webhook settings in the Developer Dashboard
-            $endpoint_secret = STRIPE_ENDPOINT_SUBUPDATE_KEY;
+            $endpoint_secret = STRIPE_ENDPOINT_KEY;
 
             $payload = @file_get_contents('php://input');
             $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
             $event = null;
 
             try {
+
                 $event = \Stripe\Webhook::constructEvent(
                     $payload, $sig_header, $endpoint_secret
                 );
+
             } catch(\UnexpectedValueException $e) {
 
                 // Invalid payload
@@ -72,6 +74,98 @@ add_action('rest_api_init', function(){
                     echo 'Passed';
 
                     break;
+                case 'customer.subscription.created':
+
+                    $obj = $event->data->object;
+
+                    $customer = $obj->customer;
+
+                    try{
+
+                        $stripe = new \Stripe\StripeClient(STRIPE_SECRET_KEY);
+                        $customer = $stripe->customers->retrieve($customer, []);
+
+                    } catch(\Stripe\Exception\CardException $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    } catch (\Stripe\Exception\RateLimitException $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    } catch (\Stripe\Exception\InvalidRequestException $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    } catch (\Stripe\Exception\AuthenticationException $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    } catch (\Stripe\Exception\ApiConnectionException $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    } catch (\Stripe\Exception\ApiErrorException $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    } catch (Exception $e) {
+
+                        echo 'error';
+
+                        exit;
+
+                    }
+
+                    if(isset($customer->metadata->never_subscribed) && isset($customer->metadata->hubspot_deal) && $customer->metadata->never_subscribed === 'true'){
+
+
+                        $hubspot = \HubSpot\Factory::createWithAccessToken(HUBSPOT_TOKEN_KEY);
+
+                        $properties1 = [
+                            'dealstage' => 'contractsent'
+                        ];
+
+                        $simplePublicObjectInput = new \HubSpot\Client\Crm\Deals\Model\SimplePublicObjectInput([
+                            'properties' => $properties1,
+                        ]);
+
+                        try {
+
+                            $apiResponse = $hubspot->crm()->deals()->basicApi()->update($customer->metadata->hubspot_deal, $simplePublicObjectInput);
+                            
+                        } catch (\HubSpot\Client\Crm\Deals\ApiException $e) {
+
+                            echo 'error';
+
+                            exit;
+
+                        }
+
+                    }
+
+
+                    echo 'passed';
+
+                    break;
+                case 'invoice.payment_succeeded'
+
+
+                    echo 'passed';
+
+                    break;
                 default:
                     echo 'Unknown event type :' . $event->type;
             }
@@ -87,7 +181,7 @@ add_action('rest_api_init', function(){
         'methods' => 'POST',
         'callback' => function(){
 
-            $secret = getenv('HUBSPOT_CLIENT_SECRET');
+            $secret = HUBSPOT_CLIENT_KEY;
             $payload = @file_get_contents('php://input');
             $signature = $_SERVER['HTTP_X_HUBSPOT_SIGNATURE_V3'];
             $timestamp = $_SERVER['HTTP_X_HUBSPOT_REQUEST_TIMESTAMP'];
@@ -128,7 +222,7 @@ add_action('rest_api_init', function(){
                     $customer = null;
 
 
-                    $hubspot = \HubSpot\Factory::createWithAccessToken(getenv('HUBSPOT_TOKEN'));
+                    $hubspot = \HubSpot\Factory::createWithAccessToken(HUBSPOT_TOKEN_KEY);
 
                     $publicFetchAssociationsBatchRequest1 = new \HubSpot\Client\Crm\Associations\V4\Model\PublicFetchAssociationsBatchRequest([
                         'id' => $dealId
@@ -191,7 +285,8 @@ add_action('rest_api_init', function(){
                             'metadata' => [
                                 'company' => $contactCompany,
                                 'hubspot_contact' => $contactID,
-                                'hubspot_deal' => $dealId
+                                'hubspot_deal' => $dealId,
+                                'never_subscribed' => 'true'
                             ]
                         ]);
 
@@ -302,7 +397,7 @@ add_action('rest_api_init', function(){
                             <body>
                                 <p>Bonjour,</p>
                                 <p style="margin-top: 8px;">'. $contactFirstname . ' ' . $contactLastname .' a été ajouté comme client Stripe et utilisateur WordPress.</p>
-                                <p style="margin-top: 8px;">Vous pouvez maintenant créer sa facture. Lorsqu\'elle sera envoyée par le système, sa position dans le pipeline de Hubspot changera automatiquement.</p>
+                                <p style="margin-top: 8px;">Vous pouvez maintenant créer son abonnement. Lorsque la facture de l\'abonnement sera envoyée par le système, sa position dans le pipeline de Hubspot changera automatiquement.</p>
                             </body>
                         </html>
                     ';
@@ -317,15 +412,5 @@ add_action('rest_api_init', function(){
         },
         'permission_callback' => '__return_true'
     ]);
-
-    /*register_rest_route('siterapide/v1', 'invoice-upcoming', [
-        'methods' => 'POST',
-        'callback' => function(){
-
-
-
-        },
-        'permission_callback' => '__return_true'
-    ]);*/
 
 });
