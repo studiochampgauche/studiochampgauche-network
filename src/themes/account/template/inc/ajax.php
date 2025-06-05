@@ -1239,10 +1239,11 @@ add_action('wp_ajax_affiliates', function(){
 
     $dealInput = new \HubSpot\Client\Crm\Deals\Model\SimplePublicObjectInput();
     $dealInput->setProperties([
-        'dealname'  => 'Deal pour ' . $firstname . ' ' . $lastname,
-        'pipeline'  => 'default',
+        'dealname' => 'Deal pour ' . $firstname . ' ' . $lastname,
+        'pipeline' => 'default',
         'dealstage' => 'qualifiedtobuy',
-        'amount'    => $dealPrice
+        'amount' => $dealPrice,
+        'package' => $package
     ]);
 
     try {
