@@ -83,7 +83,7 @@ add_action('rest_api_init', function(){
     ]);
 
 
-    register_rest_route('siterapide/v1', 'dealwin', [
+    register_rest_route('siterapide/v1', 'hubspot-create-user', [
         'methods' => 'POST',
         'callback' => function(){
 
@@ -93,7 +93,7 @@ add_action('rest_api_init', function(){
             $timestamp = $_SERVER['HTTP_X_HUBSPOT_REQUEST_TIMESTAMP'];
 
             // Calcul de la signature attendue
-            $computed_signature = base64_encode(hash_hmac('sha256', 'POSThttps://moncompte.siterapide.ca/wp-json/siterapide/v1/dealwin'.$payload.$timestamp, $secret, true));
+            $computed_signature = base64_encode(hash_hmac('sha256', 'POSThttps://moncompte.siterapide.ca/wp-json/siterapide/v1/hubspot-create-user'.$payload.$timestamp, $secret, true));
 
             // Vérification sécurisée
             if ($computed_signature !== $signature) {
@@ -118,7 +118,7 @@ add_action('rest_api_init', function(){
 
                     &&
 
-                    $event['propertyValue'] === 'closedwon'
+                    $event['propertyValue'] == '1483456458'
                 ) {
 
                     require_once 'composer/vendor/autoload.php';
