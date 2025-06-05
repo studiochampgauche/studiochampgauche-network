@@ -47,33 +47,6 @@ add_action('rest_api_init', function(){
 
             // Handle the event
             switch ($event->type) {
-                case 'customer.subscription.updated':
-
-                    $obj = $event->data->object;
-
-                    if(isset($obj->metadata->domain) || isset($obj->metadata->sub_domain)){
-
-                        $main_site = get_blog_details(['domain' => $obj->metadata->domain]);
-                        $site = $main_site ? $main_site : get_blog_details(['domain' => $obj->metadata->sub_domain]);
-
-                        if($site){
-                            
-                            switch_to_blog($site->blog_id);
-
-                            if(in_array($obj->status, ['active', 'past_due', 'unpaid'])){
-
-                                update_field('field_67a32c666fe1f', $obj->status, 'option');
-
-                            }
-
-                            restore_current_blog();
-                        }
-
-                    }
-
-                    echo 'Passed';
-
-                    break;
                 case 'customer.subscription.created':
 
                     $obj = $event->data->object;
@@ -205,6 +178,33 @@ add_action('rest_api_init', function(){
                     echo 'passed';
 
                     break;
+                case 'customer.subscription.updated':
+
+                    $obj = $event->data->object;
+
+                    if(isset($obj->metadata->domain) || isset($obj->metadata->sub_domain)){
+
+                        $main_site = get_blog_details(['domain' => $obj->metadata->domain]);
+                        $site = $main_site ? $main_site : get_blog_details(['domain' => $obj->metadata->sub_domain]);
+
+                        if($site){
+                            
+                            switch_to_blog($site->blog_id);
+
+                            if(in_array($obj->status, ['active', 'past_due', 'unpaid'])){
+
+                                update_field('field_67a32c666fe1f', $obj->status, 'option');
+
+                            }
+
+                            restore_current_blog();
+                        }
+
+                    }
+
+                    echo 'Passed';
+
+                    break;
                 case 'invoice.payment_succeeded':
 
 
@@ -222,7 +222,7 @@ add_action('rest_api_init', function(){
     ]);
 
 
-    register_rest_route('siterapide/v1', 'hubspot-create-user', [
+    register_rest_route('siterapide/v1', 'hubspot', [
         'methods' => 'POST',
         'callback' => function(){
 
@@ -232,7 +232,7 @@ add_action('rest_api_init', function(){
             $timestamp = $_SERVER['HTTP_X_HUBSPOT_REQUEST_TIMESTAMP'];
 
             
-            $computed_signature = base64_encode(hash_hmac('sha256', 'POSThttps://moncompte.siterapide.ca/wp-json/siterapide/v1/hubspot-create-user'.$payload.$timestamp, $secret, true));
+            $computed_signature = base64_encode(hash_hmac('sha256', 'POSThttps://moncompte.siterapide.ca/wp-json/siterapide/v1/hubspot'.$payload.$timestamp, $secret, true));
 
             
             if ($computed_signature !== $signature) {
