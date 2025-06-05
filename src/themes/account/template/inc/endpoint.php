@@ -144,8 +144,53 @@ add_action('rest_api_init', function(){
 
                         try {
 
+                            $stripe->customers->update(
+                                $customer->id,
+                                [
+                                    'metadata' => [
+                                        'never_subscribed' => 'false'
+                                    ]
+                                ]
+                            );
+
                             $apiResponse = $hubspot->crm()->deals()->basicApi()->update($customer->metadata->hubspot_deal, $simplePublicObjectInput);
                             
+                        } catch(\Stripe\Exception\CardException $e) {
+
+                            echo 'error';
+
+                            exit;
+
+                        } catch (\Stripe\Exception\RateLimitException $e) {
+
+                            echo 'error';
+
+                            exit;
+
+                        } catch (\Stripe\Exception\InvalidRequestException $e) {
+
+                            echo 'error';
+
+                            exit;
+
+                        } catch (\Stripe\Exception\AuthenticationException $e) {
+
+                            echo 'error';
+
+                            exit;
+
+                        } catch (\Stripe\Exception\ApiConnectionException $e) {
+
+                            echo 'error';
+
+                            exit;
+
+                        } catch (\Stripe\Exception\ApiErrorException $e) {
+
+                            echo 'error';
+
+                            exit;
+
                         } catch (\HubSpot\Client\Crm\Deals\ApiException $e) {
 
                             echo 'error';
@@ -160,7 +205,7 @@ add_action('rest_api_init', function(){
                     echo 'passed';
 
                     break;
-                case 'invoice.payment_succeeded'
+                case 'invoice.payment_succeeded':
 
 
                     echo 'passed';
