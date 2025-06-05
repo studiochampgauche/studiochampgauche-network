@@ -1228,8 +1228,7 @@ add_action('wp_ajax_affiliates', function(){
     }
 
 
-    $dealPrice = null
-    ;
+    $dealPrice = null;
     if($package === 'small-budget')
         $dealPrice = '499';
     elseif($package === 'multi-sections')
