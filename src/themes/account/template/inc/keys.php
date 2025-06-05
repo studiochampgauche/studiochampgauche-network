@@ -12,5 +12,5 @@ if(!defined('STRIPE_ENDPOINT_KEY'))
 if(!defined('HUBSPOT_TOKEN_KEY'))
 	define('HUBSPOT_TOKEN_KEY', getenv('HUBSPOT_TOKEN'));
 
-if(!defined('HUBSPOT_SECRET_KEY'))
+if(!defined('HUBSPOT_CLIENT_KEY'))
 	define('HUBSPOT_CLIENT_KEY', getenv('HUBSPOT_CLIENT_SECRET'));
