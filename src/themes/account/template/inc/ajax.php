@@ -1216,7 +1216,7 @@ add_action('wp_ajax_affiliates', function(){
         $contact = $hubspot->crm()->contacts()->basicApi()->create($contactInput);
         $contactId = $contact->getId();
 
-    } catch (ApiException $e) {
+    } catch (\HubSpot\Client\Crm\Contacts\ApiException $e) {
 
         echo wp_json_encode([
             'status' => 'error',
