@@ -1200,7 +1200,7 @@ add_action('wp_ajax_affiliates', function(){
     require_once 'composer/vendor/autoload.php';
 
 
-    $hubspot = \HubSpot\Factory::createWithAccessToken(getenv('HUBSPOT_TOKEN'));
+    $hubspot = \HubSpot\Factory::createWithAccessToken(HUBSPOT_TOKEN_KEY);
 
     $contactInput = new \HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput();
     $contactInput->setProperties([
