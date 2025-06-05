@@ -188,7 +188,11 @@ add_action('rest_api_init', function(){
                             'name' => $contactFirstname . ' ' . $contactLastname,
                             'email' => $contactEmail,
                             'phone' => $contactPhone,
-                            'metadata' => ['company' => $contactCompany]
+                            'metadata' => [
+                                'company' => $contactCompany,
+                                'hubspot_contact' => $contactID,
+                                'hubspot_deal' => $dealId
+                            ]
                         ]);
 
 
@@ -298,6 +302,7 @@ add_action('rest_api_init', function(){
                             <body>
                                 <p>Bonjour,</p>
                                 <p style="margin-top: 8px;">'. $contactFirstname . ' ' . $contactLastname .' a été ajouté comme client Stripe et utilisateur WordPress.</p>
+                                <p style="margin-top: 8px;">Vous pouvez maintenant créer sa facture. Lorsqu\'elle sera envoyée par le système, sa position dans le pipeline de Hubspot changera automatiquement.</p>
                             </body>
                         </html>
                     ';
