@@ -65,7 +65,7 @@ const PageTransition = () => {
 
 
 			tl
-			.to('#viewport', .2, {
+			.to('main', .2, {
 				opacity: 0,
 				pointerEvents: 'none'
 			});
@@ -181,7 +181,7 @@ const PageTransition = () => {
 
 
 		tl
-		.to('#viewport', .2, {
+		.to('main', .2, {
 			opacity: 1,
 			pointerEvents: 'initial'
 		});

@@ -11,7 +11,7 @@ const Docs = () => {
 				<div className="container">
 					<Contents
 						titleTag='h1'
-						title='Coming soon..'
+						title='Docs Under Construction'
 					/>
 				</div>
 			</section>

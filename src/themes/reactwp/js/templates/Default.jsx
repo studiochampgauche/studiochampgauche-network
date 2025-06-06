@@ -10,17 +10,8 @@ const Default = () => {
 			<section id="h__intro">
 				<div className="container">
 					<Contents
-						buttons={[
-							{
-								url: '/docs/',
-								text: 'Documentations'
-							},
-							{
-								url: 'https://github.com/studiochampgauche/ReactWP',
-								text: 'GitHub',
-								new_tab: true
-							}
-						]}
+						titleTag='h1'
+						title='Website Under Construction'
 					/>
 				</div>
 			</section>
