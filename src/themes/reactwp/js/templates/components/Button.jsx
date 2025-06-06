@@ -28,14 +28,14 @@ const Button = ({ to = null, text, className = null, before, after, ...props }) 
 		})
 		.set(ref.current.querySelector('span'), {
 			y: -10,
-			color: '#000'
+			color: '#1c1c1c'
 		})
 		.to(ref.current.querySelector('span'), .1, {
 			y: 0,
 			opacity: 1
 		})
 		.to(ref.current, .2, {
-			background: '#fff'
+			background: '#DADADA'
 		}, 0)
 		.paused(true);
 

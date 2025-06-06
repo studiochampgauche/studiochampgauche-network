@@ -159,6 +159,9 @@ add_action('wp_head', function(){
         :root{
             --white-color: #fff;
             --black-color: #000;
+            --theme-color: #1c1c1c;
+            --text-n1-color: #DADADA;
+            --text-n2-color: #6B6B6B;
         }
 
         *{
@@ -188,7 +191,7 @@ add_action('wp_head', function(){
         }
 
         body{
-            background: var(--black-color);
+            background: var(--theme-color);
             font-family: "mori";
             max-height: 100lvh;
             overflow: hidden;

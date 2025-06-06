@@ -29,7 +29,7 @@
 						justify-content: flex-start;
 						margin: 0 0 20px;
 						.icon{
-							background: var(--white-color);
+							background: var(--text-n1-color);
 							width: 20px;
 							height: 20px;
 							border-radius: 6px;
@@ -37,7 +37,7 @@
 						span{
 							font-size: 16px;
 							font-weight: 800;
-							color: var(--white-color);
+							color: var(--text-n1-color);
 						}
 					}
 					ul{
@@ -45,7 +45,12 @@
 						li{
 							a{
 								font-size: 16px;
-								color: var(--white-color);
+								color: var(--text-n1-color);
+								transition-property: color;
+								transition-duration: .2s;
+								&:hover{
+									color: var(--text-n2-color);
+								}
 							}
 						}
 					}
@@ -72,13 +77,12 @@
 						align-items: center;
 						li{
 							a{
-								opacity: .6;
 								font-size: 16px;
-								color: var(--white-color);
-								transition-property: opacity;
+								color: var(--text-n2-color);
+								transition-property: color;
 								transition-duration: .2s;
 								&:hover{
-									opacity: 1;
+									color: var(--white-color);
 								}
 							}
 						}
@@ -92,7 +96,7 @@
 						h4,
 						h5,
 						h6{
-							color: var(--white-color);
+							color: var(--text-n1-color);
 						}
 						h2,
 						h3,
@@ -120,8 +124,7 @@
 						}
 						.uptitle,
 						.subtitle{
-							opacity: .6;
-							color: var(--white-color);
+							color: var(--text-n2-color);
 						}
 						rwp-wrap{
 							display: block;
@@ -144,7 +147,7 @@
 								padding-left: 40px;
 								li{
 									line-height: 140%;
-									color: var(--white-color);
+									color: var(--text-n1-color);
 									&+li{
 										margin-top: 3px;
 									}
@@ -171,9 +174,14 @@
 							}
 							p{
 								line-height: 140%;
-								color: var(--white-color);
+								color: var(--text-n1-color);
 								a{
-									color: var(--white-color);
+									color: var(--text-n1-color);
+									transition-property: color;
+									transition-duration: .2s;
+									&:hover{
+										color: var(--text-n2-color);
+									}
 								}
 								&+p,
 								&+ul,
@@ -277,7 +285,12 @@
 							li{
 								a{
 									font-size: 16px;
-									color: var(--white-color);
+									color: var(--text-n1-color);
+									transition-property: color;
+									transition-duration: .2s;
+									&:hover{
+										color: var(--text-n2-color);
+									}
 								}
 							}
 						}
@@ -331,7 +344,7 @@
 				article{
 					max-width: 100%;
 					border-right: none;
-					padding: 60px 30px;
+					padding: 60px 30px 40px;
 				}
 				aside{
 					display: none;

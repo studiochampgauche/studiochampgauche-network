@@ -67,12 +67,13 @@ section{
 	padding: 0 35px;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid var(--white-color);
+	border: 1px solid var( --text-n1-color);
+	border-radius: 6px;
 	span{
 		font-size: 18px;
 		font-weight: 400;
 		font-family: 'mori';
-		color: var(--white-color);
+		color: var( --text-n1-color);
 		//text-transform: uppercase;
 	}
 	@media screen and (max-width: 1366px){
