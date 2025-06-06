@@ -1,3 +1,5 @@
+@use '../inc/functions' as *;
+
 a{
 	text-decoration: none;
 }
@@ -72,6 +74,11 @@ section{
 		font-family: 'mori';
 		color: var(--white-color);
 		//text-transform: uppercase;
+	}
+	@media screen and (max-width: 1366px){
+		span{
+			font-size: clamp(16px, vw(18px, 1366px), 18px);
+		}
 	}
 }
 
