@@ -35,6 +35,8 @@ const Scroller = () => {
 		window.gscroll.paused(true);
 
 
+		window.gscroll.kill();
+
 		window.loader.isLoaded.gscroll = true;
 		
 		

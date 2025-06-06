@@ -7,7 +7,8 @@ p{
 }
 
 
-ul{
+ul,
+ol{
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -59,10 +60,9 @@ section{
 	display: flex;
 	width: fit-content;
 	height: 50px;
-	min-width: 280px;
 	margin: 0;
 	//border-radius: 35px;
-	padding: 0 25px;
+	padding: 0 35px;
 	align-items: center;
 	justify-content: center;
 	border: 1px solid var(--white-color);
@@ -73,4 +73,12 @@ section{
 		color: var(--white-color);
 		//text-transform: uppercase;
 	}
+}
+
+.buttons{
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 12px;
+	column-gap: 16px;
+	align-items: center;
 }

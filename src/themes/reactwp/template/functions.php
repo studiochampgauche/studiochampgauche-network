@@ -170,6 +170,11 @@ add_action('wp_head', function(){
             &::-webkit-scrollbar {
                 display: none;
             }
+            &::selection{
+                background: var(--white-color);
+                color: var(--black-color);
+                opacity: 1;
+            }
         }
 
         html,
