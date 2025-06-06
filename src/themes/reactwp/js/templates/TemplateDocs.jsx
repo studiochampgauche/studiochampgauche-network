@@ -7,11 +7,13 @@ const Docs = () => {
 	
 	return(
 		<>
-			<div class="docs">
-				<div className="sidebar"></div>
-				<div className="main-contents">
-					<article></article>
-					<aside></aside>
+			<div className="docs">
+				<div className="container">
+					<div className="sidebar"></div>
+					<div className="main-contents">
+						<article></article>
+						<aside></aside>
+					</div>
 				</div>
 			</div>
 		</>
