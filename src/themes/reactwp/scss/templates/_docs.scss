@@ -1,0 +1,26 @@
+//@use '../inc/variables' as *;
+//@use '../inc/functions' as *;
+//@use '../inc/mixins' as *;
+
+#docs_{
+	&_intro{
+		display: flex;
+		height: 100vh;
+		align-items: center;
+		justify-content: center;
+		.container{
+			.contents{
+				margin: 0 auto;
+				.inner-contents{
+					h1{
+						display: table;
+						margin: 0 auto;
+						font-size: 48px;
+						text-align: center;
+						color: var(--white-color);
+					}
+				}
+			}
+		}
+	}
+}

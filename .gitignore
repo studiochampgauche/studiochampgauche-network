@@ -4,6 +4,7 @@ dist
 !/src/themes/champgauche
 !/src/themes/siterapide
 !/src/themes/account
+!/src/themes/reactwp
 /src/plugins/scg-ecommerce
 /src/plugins/reactwp-consent
 /src/core/wp-content/themes/*
@@ -11,6 +12,7 @@ dist
 !/src/core/wp-content/themes/champgauche
 !/src/core/wp-content/themes/siterapide
 !/src/core/wp-content/themes/account
+!/src/core/wp-content/themes/reactwp
 /src/core/wp-content/plugins/scg-ecommerce
 /src/core/wp-content/plugins/reactwp-consent
 node_modules

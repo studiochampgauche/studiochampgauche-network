@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+@font-face {
+	font-family: 'mori';
+	src: url($font_path + 'PPMori-Regular.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'mori';
+	src: url($font_path + 'PPMori-ExtraBold.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+}

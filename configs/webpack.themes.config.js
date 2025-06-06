@@ -11,6 +11,7 @@ const themes = [
 	'account',
 	'azimut',
 	'core',
+	'reactwp',
 	'maxium',
 	'merinair',
 	'on-rails',
