@@ -2,48 +2,27 @@
 //@use '../inc/functions' as *;
 //@use '../inc/mixins' as *;
 
-#docs_{
-	&_intro{
-		display: flex;
-		height: 100vh;
-		padding: 120px 20px 60px;
-		align-items: center;
-		justify-content: center;
-		.container{
-			.contents{
-				margin: 0 auto;
-				.inner-contents{
-					h1{
-						display: table;
-						margin: 0 auto;
-						font-size: 48px;
-						text-align: center;
-						color: var(--white-color);
-					}
-				}
-			}
+.docs{
+	display: flex;
+	width: 100%;
+	height: 100svh;
+	padding-top: 65px;
+	.sidebar,
+	.main-contents{
+		height: 100%;
+	}
+	.sidebar{
+		width: 320px;
+		flex: 0 0 320px;
+		border-right: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	.main-contents{
+		width: 100%;
+		article{
+
 		}
-		@media screen and (max-width: 1280px){
-			.container{
-				.contents{
-					.inner-contents{
-						h1{
-							font-size: 36px;
-						}
-					}
-				}
-			}
-		}
-		@media screen and (max-width: 540px){
-			.container{
-				.contents{
-					.inner-contents{
-						h1{
-							font-size: 28px;
-						}
-					}
-				}
-			}
+		aside{
+
 		}
 	}
 }

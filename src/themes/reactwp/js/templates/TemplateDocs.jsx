@@ -7,14 +7,13 @@ const Docs = () => {
 	
 	return(
 		<>
-			<section id="docs__intro">
-				<div className="container">
-					<Contents
-						titleTag='h1'
-						title='Docs Under Construction'
-					/>
+			<div class="docs">
+				<div className="sidebar"></div>
+				<div className="main-contents">
+					<article></article>
+					<aside></aside>
 				</div>
-			</section>
+			</div>
 		</>
 	);
 	
