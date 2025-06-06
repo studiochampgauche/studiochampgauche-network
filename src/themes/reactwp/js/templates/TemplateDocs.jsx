@@ -143,7 +143,23 @@ const Docs = () => {
 								/>
 							</div>
 						</article>
-						<aside></aside>
+						<aside>
+							<div className="inner">
+								<div className="item">
+									<ul>
+										<li>
+											<Link href="">Lorem ipsum dolor</Link>
+										</li>
+										<li>
+											<Link href="">Lorem ipsum dolor</Link>
+										</li>
+										<li>
+											<Link href="">Lorem ipsum dolor</Link>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</aside>
 					</div>
 				</div>
 			</div>
