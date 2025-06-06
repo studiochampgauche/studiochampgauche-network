@@ -44,7 +44,40 @@ const Docs = () => {
 			<div className="docs">
 				<div className="container">
 					<div className="sidebar">
-						
+						<div className="inner">
+							<div className="item">
+								<div className="title">
+									<span>Lorem ipsum</span>
+								</div>
+								<ul>
+									<li>
+										<Link href="">Lorem ipsum dolor</Link>
+									</li>
+									<li>
+										<Link href="">Lorem ipsum dolor</Link>
+									</li>
+									<li>
+										<Link href="">Lorem ipsum dolor</Link>
+									</li>
+								</ul>
+							</div>
+							<div className="item">
+								<div className="title">
+									<span>Lorem ipsum</span>
+								</div>
+								<ul>
+									<li>
+										<Link href="">Lorem ipsum dolor</Link>
+									</li>
+									<li>
+										<Link href="">Lorem ipsum dolor</Link>
+									</li>
+									<li>
+										<Link href="">Lorem ipsum dolor</Link>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					<div className="main-contents">
 						<article>
