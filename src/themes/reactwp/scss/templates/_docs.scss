@@ -148,6 +148,14 @@
 								li{
 									line-height: 140%;
 									color: var(--text-n1-color);
+									a{
+										color: var(--text-n1-color);
+										transition-property: color;
+										transition-duration: .2s;
+										&:hover{
+											color: var(--text-n2-color);
+										}
+									}
 									&+li{
 										margin-top: 3px;
 									}

@@ -53,16 +53,16 @@ header{
 					width: 16px;
 					height: auto;
 					path{
-						fill: var(--white-color);
+						fill: var(--text-n1-color);
 						transition-property: fill;
 						transition-duration: .2s;
 					}
 				}
 				&:hover{
-					background: var(--white-color);
+					background: var(--text-n1-color);
 					svg{
 						path{
-							fill: var(--black-color);
+							fill: var(--theme-color);
 						}
 					}
 				}
@@ -78,21 +78,32 @@ header{
 					li{
 						a{
 							font-size: 18px;
-							color: var(--white-color);
+							color: var(--text-n1-color);
 							&.btn{
-								background: var(--white-color);
+								background: var(--text-n1-color);
 								min-width: initial;
 								border-radius: 6px;
+								transition-property: background, border-color;
+								transition-duration: .2s, .2s;
 								height: 35px;
 								span{
-									color: var(--black-color);
+									color: var(--theme-color);
+									transition-property: color;
+									transition-duration: .2s;
+								}
+								&:hover{
+									background: var(--text-n2-color);
+									border-color: var(--text-n2-color);
+									span{
+										color: var(--text-n1-color);
+									}
 								}
 							}
 							&:not(.btn){
-								transition-property: opacity;
+								transition-property: color;
 								transition-duration: .2s;
 								&:hover{
-									opacity: .6;
+									color: var(--text-n2-color);
 								}
 							}
 						}
@@ -115,7 +126,7 @@ header{
 						width: 40px;
 						height: 14px;
 						.bar{
-							background: var(--white-color);
+							background: var(--text-n1-color);
 							position: absolute;
 							width: 100%;
 							height: 2px;
