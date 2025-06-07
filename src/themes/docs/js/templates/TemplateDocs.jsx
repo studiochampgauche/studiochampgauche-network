@@ -226,7 +226,7 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 								<nav>
 									<ul>
 										{breadcrumb_datas?.map((item, i) => (
-											<li>
+											<li key={i}>
 												<Link to={item.url}>{item.title}</Link>
 											</li>
 										))}
