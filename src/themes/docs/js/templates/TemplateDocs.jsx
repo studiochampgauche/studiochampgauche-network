@@ -100,40 +100,7 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 									buttons={acf?.intro?.buttons}
 								/>
 								<Contents
-									text={`
-										<h2>Lorem ipsum dolor sit amet</h2>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum ullamcorper sapien a finibus.</p>
-										<h2>Lorem ipsum dolor sit amet</h2>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum ullamcorper sapien a finibus.</p>
-										<ul>
-											<li>Lorem ipsum</li>
-											<li>Lorem ipsum</li>
-											<li>Lorem ipsum</li>
-										</ul>
-										<ol>
-											<li>Lorem ipsum</li>
-											<li>Lorem ipsum</li>
-											<li>Lorem ipsum</li>
-										</ol>
-										<code data-language="html">
-											<div class="super-saiyan">
-												<p>bonjour</p>
-											</div>
-										</code>
-										<div class="notice">
-											<h3>Lorem ipsum</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum ullamcorper sapien a finibus.</p>
-											<ul>
-												<li>Lorem ipsum</li>
-												<li>Lorem ipsum</li>
-												<li>Lorem ipsum</li>
-											</ul>
-										</div>
-										<h2>Lorem ipsum dolor sit amet</h2>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum ullamcorper sapien a finibus.</p>
-										<h2>Lorem ipsum dolor sit amet</h2>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum ullamcorper sapien a finibus.</p>
-									`}
+									text={acf?.contents}
 								/>
 							</div>
 						</article>
