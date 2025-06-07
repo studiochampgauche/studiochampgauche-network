@@ -53,6 +53,16 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 		});
 
 
+		killEvents.push(() => {
+
+			if(asideUlRef.current){
+
+				asideUlRef.current.innerHTML = '';
+				
+			}
+
+		});
+
 		function untab(str) {
 			const lines = str.split('\n');
 
@@ -69,69 +79,68 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 
 
 
-		let animMenu = gsap.timeline();
+
+		if(window.innerWidth <= 768){
+
+			let animMenu = gsap.timeline();
 
 
-		animMenu
-		.to(sidebarRef.current, .2, {
-			height: (sidebarInnerRef.current.getBoundingClientRect().bottom - sidebarInnerRef.current.getBoundingClientRect().top)
-		})
-		.to(menuIconRef.current, .2, {
-			rotate: 90
-		}, 0)
-		.paused(true);
+			animMenu
+			.to(sidebarRef.current, .2, {
+				height: (sidebarInnerRef.current.getBoundingClientRect().bottom - sidebarInnerRef.current.getBoundingClientRect().top)
+			})
+			.to(menuIconRef.current, .2, {
+				rotate: 90
+			}, 0)
+			.paused(true);
 
-		const handleMenuClick = () => {
+			const handleMenuClick = () => {
 
-			menuBtnRef.current.classList.toggle('active');
+				menuBtnRef.current.classList.toggle('active');
 
 
-			if(menuBtnRef.current.classList.contains('active')){
+				if(menuBtnRef.current.classList.contains('active')){
 
-				animMenu.play();
-				animMenu.reversed(false);
+					animMenu.play();
+					animMenu.reversed(false);
 
-			} else {
+				} else {
 
-				animMenu.play();
-				animMenu.reversed(true);
+					animMenu.play();
+					animMenu.reversed(true);
+
+				}
 
 			}
+
+			menuBtnRef.current.addEventListener('click', handleMenuClick);
+
+
+			killEvents.push(() => {
+
+
+				if(sidebarRef.current){
+
+					gsap.set(sidebarRef.current, {
+						height: 0
+					});
+					
+				}
+
+				if(menuIconRef.current){
+
+					gsap.set(menuIconRef.current, {
+						rotate: 0
+					});
+
+				}
+
+				menuBtnRef.current?.classList.remove('active');
+				menuBtnRef.current?.removeEventListener('click', handleMenuClick);
+
+			});
 
 		}
-
-		menuBtnRef.current.addEventListener('click', handleMenuClick);
-
-
-		killEvents.push(() => {
-
-			if(asideUlRef.current){
-
-				asideUlRef.current.innerHTML = '';
-				
-			}
-
-
-			if(sidebarRef.current){
-
-				gsap.set(sidebarRef.current, {
-					height: 0
-				});
-				
-			}
-
-			if(menuIconRef.current){
-
-				gsap.set(menuIconRef.current, {
-					rotate: 0
-				});
-
-			}
-
-			menuBtnRef.current?.classList.remove('active');
-			menuBtnRef.current?.removeEventListener('click', handleMenuClick);
-
-		});
 
 
 		return () => killEvents?.forEach(killEvent => killEvent());
