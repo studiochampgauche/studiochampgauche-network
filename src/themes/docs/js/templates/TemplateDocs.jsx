@@ -173,7 +173,12 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 		});
 
 
-		return () => killEvents?.forEach(killEvent => killEvent());
+		return () => {
+
+			killEvents?.forEach(killEvent => killEvent());
+			matchMediaKillEvents?.forEach(killEvent => killEvent());
+
+		}
 
 	});
 
