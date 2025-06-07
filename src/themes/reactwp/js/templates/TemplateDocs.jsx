@@ -1,6 +1,7 @@
 'use strict';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 import hljs from 'highlight.js';
 import Contents from './components/Contents';
 
@@ -15,7 +16,7 @@ const Docs = () => {
 
 			code.innerHTML = untab(code.innerHTML.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;')).trim();
 
-			hljs.highlightElement(code);
+			gsap.delayedCall(.4, () => hljs.highlightElement(code));
 
 		});
 
