@@ -6,7 +6,7 @@ import hljs from 'highlight.js';
 import Contents from './components/Contents';
 
 const Docs = ({ pageName, acf, extraDatas }) => {
-	
+
 	useEffect(() => {
 
 		const killEvents = [];
@@ -46,38 +46,29 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 				<div className="container">
 					<div className="sidebar">
 						<div className="inner">
-							<div className="item">
-								<div className="title">
-									<span>Lorem ipsum</span>
+							{SIDEBAR && SIDEBAR.map((sidebarElement, i) => (
+
+								<div className="item" key={i}>
+
+									{sidebarElement.group_name && (
+										<div className="title">
+											<span>{sidebarElement.group_name}</span>
+										</div>
+									)}
+
+									{sidebarElement.items && (
+										<ul>
+											{sidebarElement.items.map((item, j) => (
+												<li key={j}>
+													<Link to={item.page}>{item.name}</Link>
+												</li>
+											))}
+										</ul>
+									)}
+
 								</div>
-								<ul>
-									<li>
-										<Link href="">Lorem ipsum dolor</Link>
-									</li>
-									<li>
-										<Link href="">Lorem ipsum dolor</Link>
-									</li>
-									<li>
-										<Link href="">Lorem ipsum dolor</Link>
-									</li>
-								</ul>
-							</div>
-							<div className="item">
-								<div className="title">
-									<span>Lorem ipsum</span>
-								</div>
-								<ul>
-									<li>
-										<Link href="">Lorem ipsum dolor</Link>
-									</li>
-									<li>
-										<Link href="">Lorem ipsum dolor</Link>
-									</li>
-									<li>
-										<Link href="">Lorem ipsum dolor</Link>
-									</li>
-								</ul>
-							</div>
+
+							))}
 						</div>
 					</div>
 					<div className="main-contents">

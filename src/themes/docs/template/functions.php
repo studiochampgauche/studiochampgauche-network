@@ -154,6 +154,13 @@ add_action('wp_enqueue_scripts', function(){
 
     wp_localize_script('rwp-main', 'ROUTES', $routes);
 
+
+
+    /*
+    * Sidebar items
+    */
+    wp_localize_script('rwp-main', 'SIDEBAR', (rwp::field('docs_sidebar') ? rwp::field('docs_sidebar') : []));
+
 });
 
 
