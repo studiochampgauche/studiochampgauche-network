@@ -1,5 +1,24 @@
 <?php
 
+add_action('init', function(){
+
+    /*
+    * Set defaults when you call scg::cpt() or StudioChampGauche\Utils\CustomPostType::get();
+    */
+    ReactWP\Utils\CustomPostType::default('posts_per_page', -1);
+    ReactWP\Utils\CustomPostType::default('paged', 1);
+    
+    
+    /*
+    * Set defaults when you call scg::menu() or ReactWP\Utils\Menu::get();
+    */
+    ReactWP\Utils\Menu::default('container', null);
+    ReactWP\Utils\Menu::default('items_wrap', '<ul>%3$s</ul>');
+
+
+});
+
+
 /*
 * Enqueue styles & scripts
 */
@@ -15,20 +34,6 @@ add_action('wp_enqueue_scripts', function(){
 	* JS
 	*/
 	wp_enqueue_script('rwp-main', get_stylesheet_directory_uri() . '/assets/js/docs.min.js', null, null, false);
-
-
-    /*
-    * Set defaults when you call scg::cpt() or StudioChampGauche\Utils\CustomPostType::get();
-    */
-    ReactWP\Utils\CustomPostType::default('posts_per_page', -1);
-    ReactWP\Utils\CustomPostType::default('paged', 1);
-    
-    
-    /*
-    * Set defaults when you call scg::menu() or ReactWP\Utils\Menu::get();
-    */
-    ReactWP\Utils\Menu::default('container', null);
-    ReactWP\Utils\Menu::default('items_wrap', '<ul>%3$s</ul>');
 
 
 
@@ -98,6 +103,8 @@ add_action('wp_enqueue_scripts', function(){
 
 	    	$pageName = rwp::field('name', $v->ID);
 
+            $parents = get_page_parents($v->ID);
+
             $routes[] = [
             	'id' => $v->ID,
             	'template' => $pageTemplate,
@@ -107,7 +114,8 @@ add_action('wp_enqueue_scripts', function(){
             	'type' => $v->post_type,
             	'seo' => (isset($acf['seo']) ? $acf['seo'] : []),
             	'mediaGroups' => (isset($acf['media_groups']) ? str_replace(', ', ',', $acf['media_groups']) : null),
-            	'main' => ($v->ID === get_the_ID() ? true : false)
+            	'main' => ($v->ID === get_the_ID() ? true : false),
+                'breadcrumb_datas' => $parents
             ];
 
 
@@ -259,3 +267,18 @@ add_action('acf/init', function(){
     ]);
 
 });
+
+
+function get_page_parents($post_id) {
+    $parents = [];
+    while ($post_id) {
+        $page = get_post($post_id);
+        if ($page) {
+            $parents[] = $page;
+            $post_id = $page->post_parent;
+        } else {
+            $post_id = 0;
+        }
+    }
+    return array_reverse($parents);
+}

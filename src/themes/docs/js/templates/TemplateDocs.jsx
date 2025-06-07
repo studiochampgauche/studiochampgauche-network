@@ -5,8 +5,9 @@ import { gsap } from 'gsap';
 import hljs from 'highlight.js';
 import Contents from './components/Contents';
 
-const Docs = ({ pageName, acf, extraDatas }) => {
+const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 
+	console.log(breadcrumb_datas);
 
 	const menuBtnRef = useRef(null);
 	const menuIconRef = useRef(null);
