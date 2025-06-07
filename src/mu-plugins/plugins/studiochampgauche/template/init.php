@@ -95,6 +95,16 @@ add_action('init', function(){
 });
 
 
+add_action('wp_enqueue_scripts', function(){
+
+    wp_localize_script('rwp-main', 'COPYRIGHT', [
+        'text' => SR_SIGNATURE_TEXT,
+        'url' => SR_SIGNATURE_URL
+    ]);
+
+}, 11);
+
+
 /*
 * Shot events on admin_head action
 */

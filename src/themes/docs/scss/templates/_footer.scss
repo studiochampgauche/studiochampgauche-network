@@ -2,4 +2,15 @@
 //@use '../inc/functions' as *;
 //@use '../inc/mixins' as *;
 
-footer{}
+footer{
+	margin: 65px 0 0;
+	span{
+		font-size: 14px;
+		line-height: 100%;
+		color: var(--gray-n1-color);
+		a{
+			color: var(--gray-n1-color);
+			text-decoration: underline;
+		}
+	}
+}

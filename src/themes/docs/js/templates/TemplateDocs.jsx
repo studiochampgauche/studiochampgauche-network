@@ -212,6 +212,9 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 								<Contents
 									text={acf?.contents}
 								/>
+								<footer>
+									<span>&copy; {new Date().getFullYear()} <Link to={COPYRIGHT.url} target="_blank">{COPYRIGHT.text}</Link></span>
+								</footer>
 							</div>
 						</article>
 						<aside ref={asideRef}>
