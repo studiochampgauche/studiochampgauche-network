@@ -91,7 +91,7 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 			let { isMobile, isNotMobile } = context.conditions;
 
 
-			if(isMobile){
+			if(isMobile && sidebarRef.current){
 
 				let animMenu = gsap.timeline();
 
@@ -160,7 +160,7 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 				});
 
 
-			} else if(isNotMobile){
+			} else if(isNotMobile && sidebarRef.current){
 
 				gsap.set(sidebarRef.current, {
 					height: '100%'
