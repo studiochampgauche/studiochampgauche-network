@@ -7,6 +7,10 @@ import Contents from './components/Contents';
 
 const Docs = ({ pageName, acf, extraDatas }) => {
 
+
+	const asideRef = useRef(null);
+	const asideUlRef = useRef(null);
+
 	useEffect(() => {
 
 		const killEvents = [];
@@ -17,6 +21,36 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 			code.innerHTML = untab(code.innerHTML.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;')).trim();
 
 			gsap.delayedCall(.4, () => hljs.highlightElement(code));
+
+		});
+
+
+		const h2Elements = document.querySelectorAll('h2');
+
+		h2Elements?.forEach((h2, i) => {
+
+			const li = document.createElement('li');
+			li.innerHTML = `<span>${h2.innerText}</span>`;
+
+			const handleClick = () => {
+
+				h2.scrollIntoView({
+					behavior: 'smooth',
+					block: 'center',
+				});
+
+			}
+
+			li.addEventListener('click', handleClick);
+			killEvents.push(() => li.removeEventListener('click', handleClick));
+
+			asideUlRef.current.appendChild(li);
+
+		});
+
+		killEvents.push(() => {
+
+			asideUlRef.current.innerHTML = '';
 
 		});
 
@@ -93,21 +127,9 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 								/>
 							</div>
 						</article>
-						<aside>
+						<aside ref={asideRef}>
 							<div className="inner">
-								<div className="item">
-									<ul>
-										<li>
-											<Link href="">Lorem ipsum dolor</Link>
-										</li>
-										<li>
-											<Link href="">Lorem ipsum dolor</Link>
-										</li>
-										<li>
-											<Link href="">Lorem ipsum dolor</Link>
-										</li>
-									</ul>
-								</div>
+								<ul ref={asideUlRef}></ul>
 							</div>
 						</aside>
 					</div>

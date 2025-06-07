@@ -288,22 +288,18 @@
 					width: 100%;
 					max-width: 320px;
 					margin: 0 0 0 45px;
-					.item{
-						ul{
-							li{
-								a{
-									font-size: 16px;
-									color: var(--gray-n1-color);
-									transition-property: color;
-									transition-duration: .2s;
-									&:hover{
-										color: var(--gray-n2-color);
-									}
+					ul{
+						li{
+							span{
+								font-size: 16px;
+								color: var(--gray-n1-color);
+								transition-property: color;
+								transition-duration: .2s;
+								cursor: pointer;
+								&:hover{
+									color: var(--gray-n2-color);
 								}
 							}
-						}
-						& + .item{
-							margin: 35px 0 0;
 						}
 					}
 				}
