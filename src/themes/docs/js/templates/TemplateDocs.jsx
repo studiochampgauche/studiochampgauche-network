@@ -8,6 +8,10 @@ import Contents from './components/Contents';
 const Docs = ({ pageName, acf, extraDatas }) => {
 
 
+	const menuBtnRef = useRef(null);
+	const menuIconRef = useRef(null);
+	const sidebarRef = useRef(null);
+	const sidebarInnerRef = useRef(null);
 	const asideRef = useRef(null);
 	const asideUlRef = useRef(null);
 
@@ -48,16 +52,6 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 
 		});
 
-		killEvents.push(() => {
-
-			if(asideUlRef.current){
-
-				asideUlRef.current.innerHTML = '';
-				
-			}
-
-		});
-
 
 		function untab(str) {
 			const lines = str.split('\n');
@@ -74,6 +68,55 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 		}
 
 
+
+		let animMenu = gsap.timeline();
+
+
+		animMenu
+		.to(sidebarRef.current, .2, {
+			height: (sidebarInnerRef.current.getBoundingClientRect().bottom - sidebarInnerRef.current.getBoundingClientRect().top)
+		})
+		.to(menuIconRef.current, .2, {
+			rotate: 90
+		}, 0)
+		.paused(true);
+
+		const handleMenuClick = () => {
+
+			menuBtnRef.current.classList.toggle('active');
+
+
+			if(menuBtnRef.current.classList.contains('active')){
+
+				animMenu.play();
+				animMenu.reversed(false);
+
+			} else {
+
+				animMenu.play();
+				animMenu.reversed(true);
+
+			}
+
+		}
+
+		menuBtnRef.current.addEventListener('click', handleMenuClick);
+
+
+		killEvents.push(() => {
+
+			if(asideUlRef.current){
+
+				asideUlRef.current.innerHTML = '';
+				
+			}
+
+
+			menuBtnRef.current?.removeEventListener('click', handleMenuClick);
+
+		});
+
+
 		return () => killEvents?.forEach(killEvent => killEvent());
 
 	});
@@ -82,8 +125,14 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 		<>
 			<div className="docs">
 				<div className="container">
-					<div className="sidebar">
-						<div className="inner">
+					<div ref={menuBtnRef} className="menu-btn">
+						<span>Menu</span>
+						<div ref={menuIconRef} className="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M579-480 285-774q-15-15-14.5-35.5T286-845q15-15 35.5-15t35.5 15l307 308q12 12 18 27t6 30q0 15-6 30t-18 27L356-115q-15 15-35 14.5T286-116q-15-15-15-35.5t15-35.5l293-293Z"/></svg>
+						</div>
+					</div>
+					<div ref={sidebarRef} className="sidebar">
+						<div ref={sidebarInnerRef} className="inner">
 							{SIDEBAR && SIDEBAR.map((sidebarElement, i) => (
 
 								<div className="item" key={i}>

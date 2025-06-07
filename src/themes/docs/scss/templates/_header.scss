@@ -3,6 +3,7 @@
 //@use '../inc/mixins' as *;
 
 header{
+	background: var(--theme-color);
 	position: fixed;
 	display: block;
 	top: 0;
@@ -15,7 +16,7 @@ header{
 		display: flex;
 		width: 100%;
 		height: 100%;
-		max-width: 1920px;
+		max-width: 1540px;
 		align-items: center;
 		justify-content: space-between;
 		.left{

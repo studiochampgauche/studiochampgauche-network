@@ -9,10 +9,35 @@
 	.container{
 		display: flex;
 		height: 100%;
-		max-width: 1920px;
+		max-width: 1540px;
 		.sidebar,
 		.main-contents{
 			height: 100%;
+		}
+		.menu-btn{
+			background: var(--theme-color);
+			position: absolute;
+			display: none;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 60px;
+			padding: 0 30px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			cursor: pointer;
+			span{
+				color: var(--gray-n1-color);
+			}
+			.icon{
+				display: inline-flex;
+				svg{
+					width: 12px;
+					height: auto;
+					path{
+						fill: var(--gray-n1-color);
+					}
+				}
+			}
 		}
 		.sidebar{
 			width: 320px;
@@ -332,23 +357,37 @@
 	}
 	@media screen and (max-width: 768px){
 		.container{
+			position: relative;
 			flex-wrap: wrap;
+			.menu-btn{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				z-index: 3;
+			}
 			.sidebar{
+				background: var(--theme-color);
+				position: absolute;
+				top: 0;
+				left: 0;
 				width: 100%;
 				height: 0px;
 				flex: 0 0 100%;
 				padding-top: 0;
 				padding-bottom: 0;
+				z-index: 2;
 				.inner{
-					padding-top: 40px;
+					padding-top: 100px;
 					padding-bottom: 40px;
 				}
 			}
 			.main-contents{
+				position: relative;
+				z-index: 1;
 				article{
 					max-width: 100%;
 					border-right: none;
-					padding: 60px 30px 40px;
+					padding: 110px 30px 40px;
 				}
 				aside{
 					display: none;
