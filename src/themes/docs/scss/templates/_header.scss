@@ -154,13 +154,31 @@ header{
 				nav{
 					height: 100%;
 					ul{
-						display: none;
+						background: var(--theme-color);
+						position: absolute;
+						display: block;
+						top: 0;
+						right: 0;
+						padding: 40px;
+						pointer-events: none;
+						opacity: 0;
+						//display: none;
+						li{
+							a{
+								white-space: nowrap;
+							}
+							& + li{
+								margin: 15px 0 0 !important;
+							}
+						}
 					}
 					.ham-menu{
+						position: relative;
 						display: flex;
 						height: 100%;
 						align-items: center;
 						justify-content: center;
+						z-index: 2;
 					}
 				}
 			}
