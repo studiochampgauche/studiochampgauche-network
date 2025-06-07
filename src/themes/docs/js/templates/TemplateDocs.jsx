@@ -50,7 +50,8 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 
 		killEvents.push(() => {
 
-			asideUlRef.current.innerHTML = '';
+			if(asideUlRef.current)
+				asideUlRef.current.innerHTML = '';
 
 		});
 
