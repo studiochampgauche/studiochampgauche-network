@@ -79,76 +79,97 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 
 
 
-
-		if(window.innerWidth <= 768){
-
-			let animMenu = gsap.timeline();
+		const mm = gsap.matchMedia();
 
 
-			animMenu
-			.to(sidebarRef.current, .2, {
-				height: (sidebarInnerRef.current.getBoundingClientRect().bottom - sidebarInnerRef.current.getBoundingClientRect().top)
-			})
-			.to(menuIconRef.current, .2, {
-				rotate: 90
-			}, 0)
-			.paused(true);
+		mm.add({
+			isMobile: '(max-width: 768px)',
+			isNotMobile: '(min-width: 769px)'
+		}, (context) => {
 
-			const handleMenuClick = () => {
-
-				menuBtnRef.current.classList.toggle('active');
+			let { isMobile, isNotMobile } = context.conditions;
 
 
-				if(menuBtnRef.current.classList.contains('active')){
+			if(isMobile){
 
-					animMenu.play();
-					animMenu.reversed(false);
+				let animMenu = gsap.timeline();
 
-				} else {
 
-					animMenu.play();
-					animMenu.reversed(true);
+				animMenu
+				.to(sidebarRef.current, .2, {
+					height: (sidebarInnerRef.current.getBoundingClientRect().bottom - sidebarInnerRef.current.getBoundingClientRect().top)
+				})
+				.to(menuIconRef.current, .2, {
+					rotate: 90
+				}, 0)
+				.paused(true);
+
+				const handleMenuClick = () => {
+
+					menuBtnRef.current.classList.toggle('active');
+
+
+					if(menuBtnRef.current.classList.contains('active')){
+
+						animMenu.play();
+						animMenu.reversed(false);
+
+					} else {
+
+						animMenu.play();
+						animMenu.reversed(true);
+
+					}
 
 				}
+
+				menuBtnRef.current.addEventListener('click', handleMenuClick);
+
+
+				killEvents.push(() => {
+
+
+					if(sidebarRef.current){
+
+						gsap.set(sidebarRef.current, {
+							height: 0
+						});
+						
+					}
+
+					if(menuIconRef.current){
+
+						gsap.set(menuIconRef.current, {
+							rotate: 0
+						});
+
+					}
+
+
+					if(animMenu){
+
+						animMenu.kill();
+						animMenu = null;
+
+					}
+
+					menuBtnRef.current?.classList.remove('active');
+					menuBtnRef.current?.removeEventListener('click', handleMenuClick);
+
+				});
+
+
+			} else if(isNotMobile){
+
+				gsap.set(sidebarRef.current, {
+					height: '100%'
+				});
 
 			}
 
-			menuBtnRef.current.addEventListener('click', handleMenuClick);
+			return () => killEvents?.forEach(killEvent => killEvent());
 
-
-			killEvents.push(() => {
-
-
-				if(sidebarRef.current){
-
-					gsap.set(sidebarRef.current, {
-						height: 0
-					});
-					
-				}
-
-				if(menuIconRef.current){
-
-					gsap.set(menuIconRef.current, {
-						rotate: 0
-					});
-
-				}
-
-
-				if(animMenu){
-
-					animMenu.kill();
-					animMenu = null;
-
-				}
-
-				menuBtnRef.current?.classList.remove('active');
-				menuBtnRef.current?.removeEventListener('click', handleMenuClick);
-
-			});
-
-		}
+		});
 
 
 		return () => killEvents?.forEach(killEvent => killEvent());
