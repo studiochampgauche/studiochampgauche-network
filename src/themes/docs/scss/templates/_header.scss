@@ -80,32 +80,10 @@ header{
 						a{
 							font-size: 18px;
 							color: var(--gray-n1-color);
-							&.btn{
-								background: var(--gray-n1-color);
-								min-width: initial;
-								border-radius: 6px;
-								transition-property: background, border-color;
-								transition-duration: .2s, .2s;
-								height: 35px;
-								span{
-									color: var(--theme-color);
-									transition-property: color;
-									transition-duration: .2s;
-								}
-								&:hover{
-									background: var(--gray-n2-color);
-									border-color: var(--gray-n2-color);
-									span{
-										color: var(--gray-n1-color);
-									}
-								}
-							}
-							&:not(.btn){
-								transition-property: color;
-								transition-duration: .2s;
-								&:hover{
-									color: var(--gray-n2-color);
-								}
+							transition-property: color;
+							transition-duration: .2s;
+							&:hover{
+								color: var(--gray-n2-color);
 							}
 						}
 						&+li{
@@ -113,6 +91,24 @@ header{
 						}
 						&:last-child{
 							margin-left: 35px;
+							a{
+								background: var(--gray-n1-color);
+								display: flex;
+								padding: 0 25px;
+								width: fit-content;
+								border-radius: 6px;
+								align-items: center;
+								justify-content: center;
+								color: var(--theme-color);
+								transition-property: background, border-color, color;
+								transition-duration: .2s, .2s, .2s;
+								height: 35px;
+								&:hover{
+									background: var(--gray-n2-color);
+									border-color: var(--gray-n2-color);
+									color: var(--gray-n1-color);
+								}
+							}
 						}
 					}
 				}

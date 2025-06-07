@@ -22,19 +22,7 @@
 				</div>
 				<div class="right">
 					<nav>
-						<ul>
-							<li>
-								<a href="/docs/">Docs</a>
-							</li>
-							<li>
-								<a href="https://github.com/studiochampgauche/ReactWP" target="_blank">GitHub</a>
-							</li>
-							<li>
-								<a href="https://github.com/studiochampgauche/ReactWP/archive/refs/heads/master.zip" class="btn">
-									<span>Download</span>
-								</a>
-							</li>
-						</ul>
+						<?= rwp::menu('main_menu'); ?>
 						<div class="ham-menu">
 							<div class="bars">
 								<div class="bar"></div>
