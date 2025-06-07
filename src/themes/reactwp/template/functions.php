@@ -160,8 +160,8 @@ add_action('wp_head', function(){
             --white-color: #fff;
             --black-color: #000;
             --theme-color: #1c1c1c;
-            --text-n1-color: #DADADA;
-            --text-n2-color: #6B6B6B;
+            --gray-n1-color: #DADADA;
+            --gray-n2-color: #6B6B6B;
         }
 
         *{

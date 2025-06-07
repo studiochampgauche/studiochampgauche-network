@@ -29,7 +29,7 @@
 						justify-content: flex-start;
 						margin: 0 0 20px;
 						.icon{
-							background: var(--text-n1-color);
+							background: var(--gray-n1-color);
 							width: 20px;
 							height: 20px;
 							border-radius: 6px;
@@ -37,7 +37,7 @@
 						span{
 							font-size: 16px;
 							font-weight: 800;
-							color: var(--text-n1-color);
+							color: var(--gray-n1-color);
 						}
 					}
 					ul{
@@ -45,11 +45,11 @@
 						li{
 							a{
 								font-size: 16px;
-								color: var(--text-n1-color);
+								color: var(--gray-n1-color);
 								transition-property: color;
 								transition-duration: .2s;
 								&:hover{
-									color: var(--text-n2-color);
+									color: var(--gray-n2-color);
 								}
 							}
 						}
@@ -78,7 +78,7 @@
 						li{
 							a{
 								font-size: 16px;
-								color: var(--text-n2-color);
+								color: var(--gray-n2-color);
 								transition-property: color;
 								transition-duration: .2s;
 								&:hover{
@@ -96,7 +96,7 @@
 						h4,
 						h5,
 						h6{
-							color: var(--text-n1-color);
+							color: var(--gray-n1-color);
 						}
 						h2,
 						h3,
@@ -124,7 +124,7 @@
 						}
 						.uptitle,
 						.subtitle{
-							color: var(--text-n2-color);
+							color: var(--gray-n2-color);
 						}
 						rwp-wrap{
 							display: block;
@@ -147,13 +147,13 @@
 								padding-left: 40px;
 								li{
 									line-height: 140%;
-									color: var(--text-n1-color);
+									color: var(--gray-n1-color);
 									a{
-										color: var(--text-n1-color);
+										color: var(--gray-n1-color);
 										transition-property: color;
 										transition-duration: .2s;
 										&:hover{
-											color: var(--text-n2-color);
+											color: var(--gray-n2-color);
 										}
 									}
 									&+li{
@@ -182,13 +182,13 @@
 							}
 							p{
 								line-height: 140%;
-								color: var(--text-n1-color);
+								color: var(--gray-n1-color);
 								a{
-									color: var(--text-n1-color);
+									color: var(--gray-n1-color);
 									transition-property: color;
 									transition-duration: .2s;
 									&:hover{
-										color: var(--text-n2-color);
+										color: var(--gray-n2-color);
 									}
 								}
 								&+p,
@@ -293,11 +293,11 @@
 							li{
 								a{
 									font-size: 16px;
-									color: var(--text-n1-color);
+									color: var(--gray-n1-color);
 									transition-property: color;
 									transition-duration: .2s;
 									&:hover{
-										color: var(--text-n2-color);
+										color: var(--gray-n2-color);
 									}
 								}
 							}
