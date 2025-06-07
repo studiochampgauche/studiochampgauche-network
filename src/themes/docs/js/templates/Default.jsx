@@ -12,6 +12,12 @@ const Default = () => {
 					<Contents
 						titleTag='h1'
 						title='Website Under Construction'
+						buttons={[
+							{
+								text: 'Documentation',
+								url: '/docs/'
+							}
+						]}
 					/>
 				</div>
 			</section>
