@@ -225,9 +225,11 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 							<div className="inner">
 								<nav>
 									<ul>
-										<li>
-											<Link to="/docs/">Home</Link>
-										</li>
+										{breadcrumb_datas?.map((item, i) => (
+											<li>
+												<Link to={item.url}>{item.title}</Link>
+											</li>
+										))}
 									</ul>
 								</nav>
 								<Contents

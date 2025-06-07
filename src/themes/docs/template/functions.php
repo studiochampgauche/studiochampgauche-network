@@ -104,6 +104,21 @@ add_action('wp_enqueue_scripts', function(){
 	    	$pageName = rwp::field('name', $v->ID);
 
             $parents = get_page_parents($v->ID);
+            $breadcrumb_datas = [];
+            if($parents){
+
+                foreach ($parents as $parent) {
+                    
+                    $title = rwp::field('intro_title', $parent->ID);
+
+                    $breadcrumb_datas[] = [
+                        'title' => ($title ? $title : get_the_title($parent->ID)),
+                        'url' => get_the_permalink($parent->ID)
+                    ];
+
+                }
+
+            }
 
             $routes[] = [
             	'id' => $v->ID,
@@ -115,7 +130,7 @@ add_action('wp_enqueue_scripts', function(){
             	'seo' => (isset($acf['seo']) ? $acf['seo'] : []),
             	'mediaGroups' => (isset($acf['media_groups']) ? str_replace(', ', ',', $acf['media_groups']) : null),
             	'main' => ($v->ID === get_the_ID() ? true : false),
-                'breadcrumb_datas' => $parents
+                'breadcrumb_datas' => $breadcrumb_datas
             ];
 
 
