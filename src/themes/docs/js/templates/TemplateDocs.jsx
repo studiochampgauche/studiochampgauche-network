@@ -112,14 +112,22 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 			}
 
 
-			gsap.set(sidebarRef.current, {
-				height: 0
-			});
+			if(sidebarRef.current){
 
-			gsap.set(menuIconRef.current, {
-				rotate: 0
-			});
-			
+				gsap.set(sidebarRef.current, {
+					height: 0
+				});
+				
+			}
+
+			if(menuIconRef.current){
+
+				gsap.set(menuIconRef.current, {
+					rotate: 0
+				});
+
+			}
+
 			menuBtnRef.current?.classList.remove('active');
 			menuBtnRef.current?.removeEventListener('click', handleMenuClick);
 
