@@ -18,6 +18,7 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 	useEffect(() => {
 
 		const killEvents = [];
+		const matchMediaKillEvents = [];
 
 
 		document.querySelectorAll('code')?.forEach((code, i) => {
@@ -126,7 +127,7 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 				menuBtnRef.current.addEventListener('click', handleMenuClick);
 
 
-				killEvents.push(() => {
+				matchMediaKillEvents.push(() => {
 
 
 					if(sidebarRef.current){
@@ -167,7 +168,7 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 
 			}
 
-			return () => killEvents?.forEach(killEvent => killEvent());
+			return () => matchMediaKillEvents?.forEach(killEvent => killEvent());
 
 		});
 
