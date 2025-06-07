@@ -48,13 +48,13 @@ function displayContent($uptitle = null, $title = null, $subtitle = null, $text 
 			if($uptitle)
 				$html .= '<span class="uptitle">'. $uptitle .'</span>';
 
-			elseif($title)
+			if($title)
 				$html .= '<'. $titleTag .'>'. $title .'</'. $titleTag .'>';
 
-			elseif($subtitle)
+			if($subtitle)
 				$html .= '<span class="subtitle">'. $subtitle .'</span>';
 
-			elseif($text){
+			if($text){
 
 				$html .= '<rwp-wrap>';
 					$html .= $text;
@@ -62,7 +62,7 @@ function displayContent($uptitle = null, $title = null, $subtitle = null, $text 
 
 			}
 
-			elseif($buttons){
+			if($buttons){
 
 				$html .= '<div class="buttons">';
 
