@@ -135,6 +135,14 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 
 				}
 
+
+				if(animMenu){
+
+					animMenu.kill();
+					animMenu = null;
+
+				}
+
 				menuBtnRef.current?.classList.remove('active');
 				menuBtnRef.current?.removeEventListener('click', handleMenuClick);
 
