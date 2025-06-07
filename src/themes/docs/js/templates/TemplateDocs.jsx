@@ -6,8 +6,6 @@ import hljs from 'highlight.js';
 import Contents from './components/Contents';
 
 const Docs = ({ pageName, acf, extraDatas }) => {
-
-	console.log(acf, extraDatas);
 	
 	useEffect(() => {
 
