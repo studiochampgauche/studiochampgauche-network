@@ -17,6 +17,20 @@ add_action('wp_enqueue_scripts', function(){
 	wp_enqueue_script('rwp-main', get_stylesheet_directory_uri() . '/assets/js/docs.min.js', null, null, false);
 
 
+    /*
+    * Set defaults when you call scg::cpt() or StudioChampGauche\Utils\CustomPostType::get();
+    */
+    ReactWP\Utils\CustomPostType::default('posts_per_page', -1);
+    ReactWP\Utils\CustomPostType::default('paged', 1);
+    
+    
+    /*
+    * Set defaults when you call scg::menu() or ReactWP\Utils\Menu::get();
+    */
+    ReactWP\Utils\Menu::default('container', null);
+    ReactWP\Utils\Menu::default('items_wrap', '<ul>%3$s</ul>');
+
+
 
 	/*
     * Remove rwp-main script type attribute
