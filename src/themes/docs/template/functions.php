@@ -140,6 +140,15 @@ add_action('wp_enqueue_scripts', function(){
             }
 
 
+            if($routes[$k]['template'] === 'TemplateDocs'){
+
+                $routes[$k]['extraDatas'] = [
+                    'modified' => date_i18n( 'l j F Y', strtotime($v->post_modified)),
+                ];
+
+            }
+
+
 	    }
 	}
 

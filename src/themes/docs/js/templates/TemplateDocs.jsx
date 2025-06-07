@@ -5,7 +5,9 @@ import { gsap } from 'gsap';
 import hljs from 'highlight.js';
 import Contents from './components/Contents';
 
-const Docs = () => {
+const Docs = ({ pageName, acf, extraDatas }) => {
+
+	console.log(acf, extraDatas);
 	
 	useEffect(() => {
 
@@ -92,19 +94,10 @@ const Docs = () => {
 								</nav>
 								<Contents
 									titleTag='h1'
-									title='Hello World'
-									subtitle='Last updated May 06, 2025'
-									text='<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum ullamcorper sapien a finibus. Sed ultrices arcu eget porta bibendum. Cras elit tortor, vehicula eu consequat scelerisque, laoreet vel metus.</p>'
-									buttons={[
-										{
-											url: '#',
-											text: 'Lorem ipsum'
-										},
-										{
-											url: '#',
-											text: 'Lorem ipsum'
-										}
-									]}
+									title={acf?.intro?.title || pageName}
+									subtitle={`Last updated ${extraDatas.modified}`}
+									text={acf?.intro?.text}
+									buttons={acf?.intro?.buttons}
 								/>
 								<Contents
 									text={`
