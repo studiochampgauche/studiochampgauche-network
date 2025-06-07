@@ -112,6 +112,13 @@ const Docs = ({ pageName, acf, extraDatas }) => {
 			}
 
 
+			gsap.set(sidebarRef.current, {
+				height: 0
+			});
+			gsap.set(menuIconRef.current, {
+				rotate: 0
+			});
+			menuBtnRef.current?.classList.remove('active');
 			menuBtnRef.current?.removeEventListener('click', handleMenuClick);
 
 		});
