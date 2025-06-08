@@ -29,6 +29,8 @@ add_action('admin_init', function(){
 */
 add_filter('acf/settings/save_json', function($path){
 
+    if(in_array(get_stylesheet(), ['the-next'])) return;
+
     global $acf_path;
 
     return $acf_path;
@@ -41,6 +43,8 @@ add_filter('acf/settings/save_json', function($path){
 */
 add_filter('acf/settings/load_json', function($paths){
 
+    if(in_array(get_stylesheet(), ['the-next'])) return;
+    
     global $acf_path;
 
     // Remove original path
