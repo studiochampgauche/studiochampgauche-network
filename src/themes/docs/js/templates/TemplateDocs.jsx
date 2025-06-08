@@ -22,7 +22,7 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 		const matchMediaKillEvents = [];
 
 
-		document.querySelectorAll('code')?.forEach((code, i) => {
+		document.querySelectorAll('pre code')?.forEach((code, i) => {
 
 			code.innerHTML = untab(code.innerHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;')).trim();
 
@@ -66,7 +66,7 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 			if(articleRef.current){
 
 				articleRef.current.scrollTop = 0;
-				
+
 			}
 
 		});
