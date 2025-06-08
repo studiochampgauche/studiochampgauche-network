@@ -63,7 +63,11 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 				
 			}
 
-			articleRef.current.scrollTop = 0;
+			if(articleRef.current){
+
+				articleRef.current.scrollTop = 0;
+				
+			}
 
 		});
 
