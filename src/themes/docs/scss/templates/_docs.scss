@@ -265,6 +265,7 @@
 								}
 							}
 							pre{
+								white-space: pre-wrap;
 								margin-bottom: 0;
 								&+p,
 								&+ul,
@@ -286,7 +287,6 @@
 								width: 100%;
 								padding: 20px;
 								border-radius: 6px;
-								white-space: pre;
 								tab-size: 4;
 								&+p,
 								&+ul,
