@@ -24,7 +24,7 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 
 		document.querySelectorAll('code')?.forEach((code, i) => {
 
-			code.innerHTML = untab(code.innerHTML.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;')).trim();
+			code.innerHTML = untab(code.innerHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;')).trim();
 
 			gsap.delayedCall(.4, () => hljs.highlightElement(code));
 

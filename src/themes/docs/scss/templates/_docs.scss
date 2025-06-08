@@ -200,6 +200,11 @@
 										margin-top: 5px;
 									}
 								}
+								code{
+									display: inline-block;
+									padding: 5px 10px;
+									width: fit-content;
+								}
 								&+ul,
 								&+ol,
 								&+code,
@@ -231,6 +236,11 @@
 									&:hover{
 										color: var(--gray-n2-color);
 									}
+								}
+								code{
+									display: inline-block;
+									padding: 5px 10px;
+									width: fit-content;
 								}
 								&+p,
 								&+ul,
