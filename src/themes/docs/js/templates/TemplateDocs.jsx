@@ -11,6 +11,8 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 	const menuIconRef = useRef(null);
 	const sidebarRef = useRef(null);
 	const sidebarInnerRef = useRef(null);
+	const articleRef = useRef(null);
+	const articleInnerRef = useRef(null);
 	const asideRef = useRef(null);
 	const asideUlRef = useRef(null);
 
@@ -60,6 +62,8 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 				asideUlRef.current.innerHTML = '';
 				
 			}
+
+			articleRef.current.scrollTop = 0;
 
 		});
 
@@ -219,8 +223,8 @@ const Docs = ({ pageName, acf, extraDatas, breadcrumb_datas }) => {
 						</div>
 					</div>
 					<div className="main-contents">
-						<article>
-							<div className="inner">
+						<article ref={articleRef}>
+							<div ref={articleInnerRef} className="inner">
 								<nav>
 									<ul>
 										{breadcrumb_datas?.map((item, i) => (
