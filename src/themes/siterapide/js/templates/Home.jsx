@@ -844,7 +844,7 @@ const Home = () => {
 											to='/debuter-mon-site/'
 											className='gray has-arrow'
 										/>
-										<i>* Les mensualités débutent 30 jours suivant le paiement des frais initiaux.</i>
+										<i>* La facture initiale comprend les frais de départ et les frais annuels.</i>
 									</div>
 								</div>
 							</div>
