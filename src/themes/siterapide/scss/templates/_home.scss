@@ -151,6 +151,23 @@
 			.container{
 				& > .contents{
 					padding: 0 30px;
+					text-align: initial;
+					.inner-contents{
+						h1{
+							br{
+								display: none;
+							}
+							.line{
+								display: inline !important;
+							}
+						}
+						.btn{
+							margin: 0;
+						}
+						.buttons{
+							margin: 30px 0 0;
+						}
+					}
 				}
 			}
 		}
@@ -267,6 +284,7 @@
 							transition-property: color;
 							transition-duration: .2s;
 							white-space: nowrap;
+							user-select: none;
 						}
 					}
 					.tbody{

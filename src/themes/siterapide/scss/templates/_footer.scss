@@ -149,7 +149,7 @@ footer{
 		}
 		.bottom{
 			display: flex;
-			row-gap: 12px;
+			row-gap: 35px;
 			column-gap: 35px;
 			flex-wrap: wrap;
 			align-items: center;
@@ -157,6 +157,7 @@ footer{
 			margin: clamp(80px, vw(118px), 118px) 0 0;
 			ul{
 				display: flex;
+				row-gap: 8px;
 				column-gap: 11px;
 				align-items: center;
 				justify-content: center;
@@ -263,7 +264,7 @@ footer{
 			.bottom{
 				ul{
 					width: 100%;
-					row-gap: 6px;
+					//row-gap: 6px;
 					flex-wrap: wrap;
 					//flex-direction: column-reverse;
 					li{
@@ -286,6 +287,13 @@ footer{
 		padding: 0;
 		.container{
 			padding: clamp(100px, vw(180px), 180px) clamp(30px, vw(72px), 72px) 26px;
+			.bottom{
+				ul{
+					li{
+						width: 100%;
+					}
+				}
+			}
 		}
 	}
 }
