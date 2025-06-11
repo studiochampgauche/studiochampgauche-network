@@ -51,10 +51,18 @@
 						<div class="bottom">
 							<ul>
 								<li>
-									<span>&copy; <?= date('Y'); ?> siterapide.ca</a></span>
+									<span>&copy; <?= date('Y'); ?> siterapide.ca</span>
 								</li>
 								<li>
-									<span>Développé par <a href="https://studiochampgauche.com" target="_blank">Studio Champ Gauche</span>
+									<span>Développé par <a href="https://studiochampgauche.com" target="_blank">Studio Champ Gauche</a></span>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									<span><a href="mailto:info@siterapide.ca">info@siterapide.ca</a></span>
+								</li>
+								<li>
+									<span><a href="/programme-affilie/">Programme affilié</a></span>
 								</li>
 							</ul>
 						</div>
