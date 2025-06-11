@@ -80,6 +80,14 @@ add_action('wp_enqueue_scripts', function(){
                 'src' => '/wp-content/uploads/2025/04/loisirs.jpg',
                 'target' => '#h__sectors-activity .container .list .track .item:nth-child(6) .img-container .inner-img .img'
             ],
+        ],
+        'affiliate' => [
+            [
+                'type' => 'image',
+                'alt' => 'Démonstration de notre programme affilié',
+                'src' => '/wp-content/uploads/sites/2/2025/06/mockup-partenaire-screen-droit.png',
+                'target' => '#affiliate__box .container .box .img-container .inner-img .img'
+            ]
         ]
     ];
     wp_localize_script('rwp-main', 'MEDIAS', $mediasToDownload);

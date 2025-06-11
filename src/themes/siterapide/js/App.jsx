@@ -7,6 +7,7 @@ import NotFoundTemplate from './templates/NotFound';
 import DefaultTemplate from './templates/Default';
 import TemplateHome from './templates/Home';
 import TemplateStart from './templates/Start';
+import TemplateAffiliate from './templates/Affiliate';
 import TemplateContact from './templates/Contact';
 import PageTransition from './inc/PageTransition';
 import Metas from './inc/Metas';
@@ -20,6 +21,7 @@ const templates = {
     DefaultTemplate,
     TemplateHome,
     TemplateContact,
+    TemplateAffiliate,
     TemplateStart
 };
 
