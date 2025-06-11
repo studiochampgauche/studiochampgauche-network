@@ -481,6 +481,7 @@
 					.item{
 						.tbody{
 							max-width: 100%;
+							padding-left: 20px;
 							.inner{
 								max-width: 100%;
 								margin: clamp(45px, vw(25px), 25px) 0 0;
@@ -532,6 +533,9 @@
 							& > span{
 								margin: 0;
 							}
+						}
+						.tbody{
+							padding: 0;
 						}
 					}
 				}
