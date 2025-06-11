@@ -50,6 +50,9 @@ section{
 	width: 100%;
 	margin: 0 auto;
 	max-width: 1840px;
+	@media screen and (min-width: 1920px){
+		max-width: 100%;
+	}
 }
 
 .contents{
@@ -105,9 +108,9 @@ section{
 		position: absolute;
 		display: flex;
 		top: 50%;
-		right: clamp(2px, vw(9px), 9px);
+		right: clamp(6px, vw(9px), 9px);
 		width: 70px;
-		height: 43px;
+		height: clamp(38px, vw(43px), 43px);
 		border-radius: 23px;
 		align-items: center;
 		justify-content: center;
