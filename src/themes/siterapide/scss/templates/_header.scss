@@ -54,6 +54,21 @@ header{
 								color: var(--gray-n4-color);
 							}
 						}
+						&:first-child{
+							display: inline-flex;
+							width: 0;
+							height: 100%;
+							margin: 0 -33px 0 0;
+							overflow: hidden;
+							a{
+								display: inline-flex;
+								height: 100%;
+								svg{
+									width: auto;
+									height: 100%;
+								}
+							}
+						}
 						&:last-child{
 							padding-left: 33px;
 							&:before{

@@ -21,20 +21,48 @@ const Ham = {
         const btn = headerElement.querySelector('.btn');
         const btnSpans = btn.querySelectorAll('span');
 
+        const firstElement = headerElement.querySelector('.plywood .container nav ul li:first-child');
+
 
         const headerAnimation = gsap.timeline();
+        const logoAnimation = gsap.timeline();
 
         let lastDirection = -1,
+            firstScrollPassed = false,
             canDrag = true;
 
 
         headerAnimation
         .to(headerElement.querySelector('.plywood'), .4, {
             y: '-100%',
-            ease: 'none'
-        });
+            ease: 'none',
+            onComplete: () => {
 
-        headerAnimation.paused(true);
+                if(!firstScrollPassed){
+
+                    firstScrollPassed = true;
+
+                    logoAnimation.play();
+                    logoAnimation.reversed(false);
+
+
+                }
+
+            }
+        })
+        .paused(true);
+
+
+        logoAnimation
+        .to(logoElement, .2, {
+            opacity: 0,
+            pointerEvents: 'none'
+        })
+        .to(firstElement, .2, {
+            margin: 0,
+            width: (firstElement.querySelector('a').getBoundingClientRect().right - firstElement.querySelector('a').getBoundingClientRect().left)
+        }, 0)
+        .paused(true);
 
         
         ScrollTrigger.create({
@@ -46,7 +74,21 @@ const Ham = {
             onUpdate: (self) => {
 
 
-                if(lastDirection === self.direction) return;
+                if(lastDirection === self.direction) {
+
+
+                    if(window.gscroll.scrollTop() < 100 && firstScrollPassed){
+
+                        firstScrollPassed = false;
+
+                        logoAnimation.play();
+                        logoAnimation.reversed(true);
+
+                    }
+
+                    return;
+
+                };
 
                 lastDirection = self.direction;
 
