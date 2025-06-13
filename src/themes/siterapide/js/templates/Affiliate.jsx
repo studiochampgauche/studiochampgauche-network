@@ -157,9 +157,9 @@ const Affiliate = () => {
 							ref={introBoxContentsRef}
 							text={`
 								<h2>Représentant</h2>
-								<p>Vous souhaitez profiter de notre programme affilié ? En tant que représentant, votre rôle serait de nous connecter avec des clients potentiels intéressés par nos services. Une opportunité simple et sans tracas.</p>
+								<p>Devenez représentant affilié de siterapide.ca. Négociez votre commission, vendez ou référez des clients, et obtenez de l’argent pour chaque client obtenu.</p>
 								<h2>Entreprise partenaire</h2>
-								<p>Vous avez des clients qui ont besoin d’un site web, mais ce n’est pas votre spécialité? Devenez partenaire de siterapide.ca et offrez-leur une solution fiable, tout en recevant une commission pour chaque projet référé. Un service clé en main qui s’intègre naturellement à vos activités.</p>
+								<p>Faites partie des entreprises partenaires de siterapide.ca. Ajoutez la création de sites web clé en main à vos services et recevez une redevance pour chaque projet vendu ou référé.</p>
 								<ul><li><span>Questions&#8239;:</span><a href="mailto:info@siterapide.ca">info@siterapide.ca</a></li><li><span>Carrière&#8239;:</span><a href="mailto:cv@siterapide.ca">cv@siterapide.ca</a></li></ul>
 							`}
 						/>
@@ -212,7 +212,7 @@ const Affiliate = () => {
 					/>
 					<Form
 						data={{
-							form: 'contact'
+							form: 'affiliate'
 						}}
 					/>
 				</div>

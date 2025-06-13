@@ -38,7 +38,7 @@ const Ham = {
             ease: 'none',
             onComplete: () => {
 
-                if(!firstScrollPassed){
+                if(!firstScrollPassed && window.innerWidth > 1280){
 
                     firstScrollPassed = true;
 
@@ -77,7 +77,7 @@ const Ham = {
                 if(lastDirection === self.direction) {
 
 
-                    if(window.gscroll.scrollTop() < 100 && firstScrollPassed){
+                    if(window.gscroll.scrollTop() < 100 && firstScrollPassed && window.innerWidth > 1280){
 
                         firstScrollPassed = false;
 

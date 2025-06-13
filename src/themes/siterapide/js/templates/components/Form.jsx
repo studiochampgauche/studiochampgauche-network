@@ -320,7 +320,7 @@ const Form = ({ id, data, method = 'POST', action = 'rwpforms', submitButtonText
            		body: formData
            	})
            	.then(resp => resp.json())
-           	.then(data => {
+           	.then(dt => {
 
            		canSubmit = true;
 
@@ -332,11 +332,17 @@ const Form = ({ id, data, method = 'POST', action = 'rwpforms', submitButtonText
 	           	const messageElement = document.createElement('p');
                 messageElement.className = 'form-message';
                 
-                messageElement.innerText = data.message;
+                messageElement.innerText = dt.message;
                 
                 ref.current.prepend(messageElement);
                 
                 ScrollTrigger.refresh();
+
+                if(dt.status === 'success' && data.form === 'affiliate'){
+
+                	window.lintrk('track', { conversion_id: 21540690 });
+                	
+                }
 
            	});
 
